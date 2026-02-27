@@ -7,11 +7,11 @@
     "contact": "Contact"
   },
   "hero": {
-    "title": "Découvrez des",
-    "subtitle": "Destinations Incroyables", 
-    "description": "Découvrez les destinations les plus époustouflantes du monde avec nos expériences de voyage sélectionnées. Des plages immaculées aux montagnes majestueuses, votre prochaine aventure vous attend.",
-    "cta": "Explorer Maintenant",
-    "book": "Réserver un Voyage"
+    "title": "Découvrez Votre Prochaine",
+    "subtitle": "Destination de Rêve",
+    "description": "Embarquez pour des voyages extraordinaires vers les destinations les plus époustouflantes du monde. Des plages ensoleillées et montagnes majestueuses aux villes vibrantes et joyaux cachés—votre aventure parfaite vous attend avec Wayfera.",
+    "cta": "Explorer les Destinations",
+    "book": "Commencer à Planifier"
   },
   "destinations": {
     "title": "Destinations Populaires",
