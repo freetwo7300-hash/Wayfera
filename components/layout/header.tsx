@@ -156,7 +156,11 @@ export function Header() {
             <Button
               variant="ghost"
               size="icon"
-              className="lg:hidden"
+              className={`lg:hidden transition-all duration-300 ${
+                isMenuOpen 
+                  ? 'bg-blue-600 hover:bg-blue-700 text-white' 
+                  : 'hover:bg-gray-100 dark:hover:bg-gray-800'
+              }`}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
             >
               <AnimatePresence mode="wait">
@@ -196,7 +200,7 @@ export function Header() {
               transition={{ duration: 0.3 }}
               className="lg:hidden overflow-hidden"
             >
-              <div className="py-4 space-y-2">
+              <div className="py-4 space-y-2 bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg rounded-lg shadow-lg border border-gray-200 dark:border-gray-800 mt-2">
                 {navItems.map((item, index) => (
                   <Link
                     key={item.key}
@@ -207,8 +211,9 @@ export function Header() {
                       initial={{ x: -20, opacity: 0 }}
                       animate={{ x: 0, opacity: 1 }}
                       transition={{ delay: index * 0.1 }}
-                      className="block px-4 py-2 text-gray-700 dark:text-gray-300 hover:bg-gray-100 
-                               dark:hover:bg-gray-800 rounded-lg cursor-pointer"
+                      className="block px-4 py-3 mx-2 text-gray-700 dark:text-gray-300 hover:bg-blue-50 
+                               dark:hover:bg-blue-950 hover:text-blue-600 dark:hover:text-blue-400
+                               rounded-lg cursor-pointer font-medium transition-all duration-200"
                     >
                       {t(`nav.${item.key}`)}
                     </motion.div>
