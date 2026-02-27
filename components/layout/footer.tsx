@@ -1,6 +1,6 @@
 "use client";
 
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { motion } from 'framer-motion';
 import { Plane, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Youtube } from 'lucide-react';
 import Link from 'next/link';
@@ -22,6 +22,7 @@ const socialLinks = [
 
 export function Footer() {
   const t = useTranslations();
+  const locale = useLocale();
 
   return (
     <footer className="bg-gray-900 dark:bg-black text-white">
@@ -134,13 +135,13 @@ export function Footer() {
           </p>
           
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link href="#" className="text-gray-400 hover:text-blue-400 transition-colors duration-200">
+            <Link href={`/${locale}/privacy`} className="text-gray-400 hover:text-blue-400 transition-colors duration-200">
               Privacy Policy
             </Link>
-            <Link href="#" className="text-gray-400 hover:text-blue-400 transition-colors duration-200">
+            <Link href={`/${locale}/terms`} className="text-gray-400 hover:text-blue-400 transition-colors duration-200">
               Terms of Service
             </Link>
-            <Link href="#" className="text-gray-400 hover:text-blue-400 transition-colors duration-200">
+            <Link href={`/${locale}/cookies`} className="text-gray-400 hover:text-blue-400 transition-colors duration-200">
               Cookie Policy
             </Link>
           </div>
