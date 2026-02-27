@@ -56,7 +56,7 @@ export function HeroSection() {
   return (
     <section 
       id="hero" 
-      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 pt-20 md:pt-24"
     >
       {/* Background Elements */}
       <div className="absolute inset-0 bg-[url('https://images.pexels.com/photos/1559825/pexels-photo-1559825.jpeg')] bg-cover bg-center opacity-10"></div>
@@ -116,7 +116,7 @@ export function HeroSection() {
           >
             {/* Typewriter Title */}
             <div className="mb-6">
-              <h1 className="text-5xl lg:text-7xl font-bold text-gray-900 dark:text-white mb-4">
+              <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-gray-900 dark:text-white mb-4">
                 <span className="inline-block min-h-[1.2em]">
                   {typewriterText}
                   <span className={`${showCursor ? 'opacity-100' : 'opacity-0'} transition-opacity duration-200`}>
@@ -128,7 +128,7 @@ export function HeroSection() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 3.5, duration: 0.8, ease: "easeOut" }}
-                className="text-4xl lg:text-6xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent"
+                className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent"
               >
                 {t('subtitle')}
               </motion.h2>
@@ -138,7 +138,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 4, duration: 0.8, ease: "easeOut" }}
-              className="text-xl lg:text-2xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed"
+              className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-600 dark:text-gray-300 mb-8 leading-relaxed"
             >
               {t('description')}
             </motion.p>
@@ -153,11 +153,11 @@ export function HeroSection() {
               <Button
                 size="lg"
                 onClick={scrollToDestinations}
-                className="group relative overflow-hidden bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-8 py-4 text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
+                className="group relative overflow-hidden bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-xl shadow-lg hover:shadow-xl transition-all duration-300"
               >
-                <span className="relative z-10 flex items-center">
+                <span className="relative z-10 flex items-center justify-center">
                   {t('cta')}
-                  <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" />
+                  <ArrowRight className="ml-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform duration-200" />
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </Button>
@@ -166,9 +166,9 @@ export function HeroSection() {
                 size="lg"
                 variant="outline"
                 onClick={scrollToBooking}
-                className="group border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-8 py-4 text-lg font-semibold rounded-xl transition-all duration-300"
+                className="group border-2 border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white px-6 sm:px-8 py-3 sm:py-4 text-base sm:text-lg font-semibold rounded-xl transition-all duration-300"
               >
-                <Play className="mr-2 w-5 h-5 group-hover:scale-110 transition-transform duration-200" />
+                <Play className="mr-2 w-4 h-4 sm:w-5 sm:h-5 group-hover:scale-110 transition-transform duration-200" />
                 {t('book')}
               </Button>
             </motion.div>
@@ -178,7 +178,7 @@ export function HeroSection() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 5, duration: 0.8 }}
-              className="grid grid-cols-3 gap-8 mt-12 pt-8 border-t border-gray-200 dark:border-gray-700"
+              className="grid grid-cols-3 gap-4 sm:gap-8 mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-gray-200 dark:border-gray-700"
             >
               {[
                 { number: '50+', label: 'Countries' },
@@ -186,10 +186,10 @@ export function HeroSection() {
                 { number: '24/7', label: 'Support' }
               ].map((stat, index) => (
                 <div key={index} className="text-center">
-                  <div className="text-2xl lg:text-3xl font-bold text-blue-600 dark:text-blue-400">
+                  <div className="text-xl sm:text-2xl lg:text-3xl font-bold text-blue-600 dark:text-blue-400">
                     {stat.number}
                   </div>
-                  <div className="text-gray-600 dark:text-gray-400 text-sm">
+                  <div className="text-gray-600 dark:text-gray-400 text-xs sm:text-sm">
                     {stat.label}
                   </div>
                 </div>
