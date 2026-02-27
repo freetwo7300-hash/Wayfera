@@ -190,12 +190,187 @@ const config: Config = {
         '::-webkit-scrollbar-thumb:hover': {
           backgroundColor: theme('colors.gray.500'),
         },
-        // Calendar popup styling
+        // Date Input Styling
+        'input[type="date"]': {
+          position: 'relative',
+          colorScheme: 'light dark',
+          paddingRight: '2.5rem',
+        },
+        // Calendar icon positioning - right side
         'input[type="date"]::-webkit-calendar-picker-indicator': {
+          position: 'absolute',
+          right: '0.75rem',
+          top: '50%',
+          transform: 'translateY(-50%)',
+          cursor: 'pointer',
+          opacity: '0.7',
+          transition: 'opacity 0.2s, transform 0.2s',
+          width: '1.25rem',
+          height: '1.25rem',
           backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='%232563eb' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='3' y='4' width='18' height='18' rx='2' ry='2'%3E%3C/rect%3E%3Cline x1='16' y1='2' x2='16' y2='6'%3E%3C/line%3E%3Cline x1='8' y1='2' x2='8' y2='6'%3E%3C/line%3E%3Cline x1='3' y1='10' x2='21' y2='10'%3E%3C/line%3E%3C/svg%3E")`,
           backgroundSize: 'contain',
           backgroundRepeat: 'no-repeat',
           backgroundPosition: 'center',
+        },
+        'input[type="date"]::-webkit-calendar-picker-indicator:hover': {
+          opacity: '1',
+          transform: 'translateY(-50%) scale(1.1)',
+        },
+        // Dark mode calendar icon
+        '.dark input[type="date"]::-webkit-calendar-picker-indicator': {
+          filter: 'invert(1)',
+        },
+        // Date field styling
+        'input[type="date"]::-webkit-datetime-edit': {
+          padding: '0',
+        },
+        'input[type="date"]::-webkit-datetime-edit-fields-wrapper': {
+          padding: '0',
+        },
+        'input[type="date"]::-webkit-datetime-edit-text': {
+          color: 'hsl(var(--muted-foreground))',
+          padding: '0 0.25rem',
+        },
+        'input[type="date"]::-webkit-datetime-edit-month-field, input[type="date"]::-webkit-datetime-edit-day-field, input[type="date"]::-webkit-datetime-edit-year-field': {
+          padding: '0.25rem 0.5rem',
+          borderRadius: '0.375rem',
+          transition: 'background-color 0.2s',
+        },
+        'input[type="date"]::-webkit-datetime-edit-month-field:focus, input[type="date"]::-webkit-datetime-edit-day-field:focus, input[type="date"]::-webkit-datetime-edit-year-field:focus': {
+          backgroundColor: 'hsl(var(--primary) / 0.1)',
+          outline: 'none',
+        },
+        // Placeholder for empty date inputs
+        'input[type="date"]:not(:focus):invalid': {
+          color: 'hsl(var(--muted-foreground))',
+        },
+        // RTL Support
+        '[dir="rtl"] input[type="date"]::-webkit-calendar-picker-indicator': {
+          right: 'auto',
+          left: '0.75rem',
+        },
+        '[dir="rtl"] input[type="date"]': {
+          paddingRight: '1rem',
+          paddingLeft: '2.5rem',
+        },
+        // Calendar Popup Styling (Limited browser support)
+        'input[type="date"]::-webkit-inner-spin-button': {
+          display: 'none',
+        },
+        'input[type="date"]::-webkit-clear-button': {
+          display: 'none',
+        },
+        // Custom Calendar Component Styling
+        '.rdp': {
+          '--rdp-cell-size': '40px',
+          '--rdp-accent-color': '#2563eb',
+          '--rdp-background-color': '#2563eb',
+          '--rdp-accent-color-dark': '#1d4ed8',
+          '--rdp-background-color-dark': '#1d4ed8',
+          '--rdp-outline': '2px solid var(--rdp-accent-color)',
+          '--rdp-outline-selected': '2px solid var(--rdp-accent-color)',
+          margin: '1rem',
+        },
+        '.rdp-months': {
+          display: 'flex',
+          gap: '1rem',
+        },
+        '.rdp-month': {
+          width: '100%',
+        },
+        '.rdp-caption': {
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          paddingTop: '0.5rem',
+          paddingBottom: '0.5rem',
+          position: 'relative',
+        },
+        '.rdp-caption_label': {
+          fontSize: '0.875rem',
+          fontWeight: '500',
+          color: 'hsl(var(--foreground))',
+        },
+        '.rdp-nav': {
+          display: 'flex',
+          gap: '0.25rem',
+        },
+        '.rdp-nav_button': {
+          display: 'inline-flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          width: '2rem',
+          height: '2rem',
+          borderRadius: '0.375rem',
+          border: '1px solid hsl(var(--border))',
+          backgroundColor: 'transparent',
+          cursor: 'pointer',
+          transition: 'all 0.2s',
+        },
+        '.rdp-nav_button:hover': {
+          backgroundColor: 'hsl(var(--accent))',
+        },
+        '.rdp-table': {
+          width: '100%',
+          borderCollapse: 'collapse',
+        },
+        '.rdp-head_cell': {
+          width: 'var(--rdp-cell-size)',
+          fontSize: '0.875rem',
+          fontWeight: '400',
+          textAlign: 'center',
+          color: 'hsl(var(--muted-foreground))',
+          paddingBottom: '0.5rem',
+        },
+        '.rdp-cell': {
+          width: 'var(--rdp-cell-size)',
+          height: 'var(--rdp-cell-size)',
+          textAlign: 'center',
+          padding: '0',
+        },
+        '.rdp-button': {
+          width: '100%',
+          height: '100%',
+          display: 'inline-flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderRadius: '0.375rem',
+          fontSize: '0.875rem',
+          fontWeight: '400',
+          border: 'none',
+          backgroundColor: 'transparent',
+          cursor: 'pointer',
+          transition: 'all 0.2s',
+        },
+        '.rdp-button:hover:not(.rdp-day_selected)': {
+          backgroundColor: 'hsl(var(--accent))',
+        },
+        '.rdp-day_selected': {
+          backgroundColor: '#2563eb',
+          color: 'white',
+          fontWeight: '500',
+        },
+        '.rdp-day_selected:hover': {
+          backgroundColor: '#1d4ed8',
+        },
+        '.rdp-day_today:not(.rdp-day_selected)': {
+          backgroundColor: 'hsl(var(--accent))',
+          fontWeight: '500',
+        },
+        '.rdp-day_outside': {
+          color: 'hsl(var(--muted-foreground))',
+          opacity: '0.5',
+        },
+        '.rdp-day_disabled': {
+          color: 'hsl(var(--muted-foreground))',
+          opacity: '0.5',
+          cursor: 'not-allowed',
+        },
+        '.dark .rdp-day_selected': {
+          backgroundColor: '#3b82f6',
+        },
+        '.dark .rdp-day_selected:hover': {
+          backgroundColor: '#2563eb',
         },
       });
       
