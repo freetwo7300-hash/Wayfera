@@ -5,7 +5,7 @@ import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { ThemeProvider } from '@/components/providers';
 import { Toaster } from 'react-hot-toast';
-import { PerformanceOptimizer, JsonLd } from '@/components/shared';
+import { PerformanceOptimizer, JsonLd, CookieConsent } from '@/components/shared';
 import { generateOrganizationSchema } from '@/lib/seo';
 
 const oswald = Oswald({ 
@@ -99,6 +99,7 @@ export default async function RootLayout({
             disableTransitionOnChange
           >
             {children}
+            <CookieConsent />
             <Toaster position="top-right" />
           </ThemeProvider>
         </NextIntlClientProvider>

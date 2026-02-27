@@ -4,3 +4,4 @@ export { PerformanceOptimizer } from './performance-optimizer';
 export { OptimizedSection } from './optimized-section';
 export { NetworkError } from './network-error';
 export { EmptyState } from './empty-state';
+export { CookieConsent } from './cookie-consent';
