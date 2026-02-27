@@ -1,7 +1,7 @@
 import { MetadataRoute } from 'next';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://wayfera.com';
+  const baseUrl = 'https://wayfera.netlify.app';
   const locales = ['en', 'ar', 'es', 'fr'];
   const routes = ['', '/destinations', '/services', '/about', '/contact', '/booking'];
 

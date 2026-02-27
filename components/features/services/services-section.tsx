@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { 
@@ -76,6 +76,7 @@ const testimonials = [
 
 export function ServicesSection() {
   const t = useTranslations('services');
+  const locale = useLocale();
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
 
   return (
@@ -111,7 +112,7 @@ export function ServicesSection() {
                 whileHover={{ y: -10, scale: 1.02 }}
                 className="group relative"
               >
-                <div className="glass glass-dark p-8 rounded-2xl text-center hover:shadow-xl transition-all duration-300 h-full">
+                <div className="glass glass-dark p-8 rounded-2xl text-center hover:shadow-xl transition-all duration-300 h-full flex flex-col">
                   {/* Icon */}
                   <div className="relative mb-6">
                     <div className="w-20 h-20 mx-auto bg-gradient-to-br from-blue-600 to-purple-600 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
@@ -125,7 +126,7 @@ export function ServicesSection() {
                     {t(`${service.id}.title`)}
                   </h3>
                   
-                  <p className="text-gray-600 dark:text-gray-300 mb-6">
+                  <p className="text-gray-600 dark:text-gray-300 mb-6 flex-grow">
                     {t(`${service.id}.description`)}
                   </p>
 
@@ -135,7 +136,7 @@ export function ServicesSection() {
                       <Button 
                         variant="outline" 
                         size="sm"
-                        className="group/btn border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white"
+                        className="group/btn border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white w-full"
                       >
                         Learn More
                         <ArrowRight className="ml-2 w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-200" />
@@ -161,7 +162,10 @@ export function ServicesSection() {
                             </li>
                           ))}
                         </ul>
-                        <Button className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+                        <Button 
+                          onClick={() => window.location.href = `/${locale}/booking`}
+                          className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+                        >
                           Get Started
                         </Button>
                       </div>

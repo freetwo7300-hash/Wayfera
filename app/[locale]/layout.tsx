@@ -25,7 +25,7 @@ const notoKufiArabic = Noto_Kufi_Arabic({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://wayfera.com'),
+  metadataBase: new URL('https://wayfera.netlify.app'),
   title: {
     default: 'Wayfera - Premium Travel Agency | Discover Amazing Destinations',
     template: '%s | Wayfera'
@@ -43,7 +43,7 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: process.env.NEXT_PUBLIC_BASE_URL || 'https://wayfera.com',
+    url: 'https://wayfera.netlify.app',
     siteName: 'Wayfera',
     title: 'Wayfera - Premium Travel Agency',
     description: 'Experience the world\'s most breathtaking destinations with our curated travel experiences.',

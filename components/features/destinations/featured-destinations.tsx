@@ -120,7 +120,10 @@ export function FeaturedDestinations() {
                       ${destination.price}
                     </div>
                   </div>
-                  <Button className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700">
+                  <Button 
+                    onClick={() => window.location.href = `/${locale}/destinations/${destination.id}`}
+                    className="bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700"
+                  >
                     View Details
                     <ArrowRight className="w-4 h-4 ml-2" />
                   </Button>

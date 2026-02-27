@@ -200,7 +200,7 @@ export function DestinationsSection() {
                     {destination.description}
                   </p>
 
-                  <div className="flex items-center justify-between">
+                  <div className="flex items-center justify-between gap-2">
                     <div>
                       <span className="text-2xl font-bold text-blue-600 dark:text-blue-400">
                         ${destination.price}
@@ -212,9 +212,10 @@ export function DestinationsSection() {
 
                     <Button
                       size="sm"
+                      onClick={() => window.location.href = `/en/destinations/${destination.id}`}
                       className="group/btn bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
                     >
-                      Book Now
+                      View Details
                       <ArrowRight className="w-4 h-4 ml-2 group-hover/btn:translate-x-1 transition-transform duration-200" />
                     </Button>
                   </div>
