@@ -19,15 +19,18 @@ export function HeroSection() {
 
   useEffect(() => {
     setMounted(true);
+    setTypewriterText(''); // Reset text when fullText changes
     
     let timeout: NodeJS.Timeout;
     let currentIndex = 0;
 
     const typeWriter = () => {
-      if (currentIndex < fullText.length) {
-        setTypewriterText(prev => prev + fullText.charAt(currentIndex));
+      if (currentIndex <= fullText.length) {
+        setTypewriterText(fullText.substring(0, currentIndex));
         currentIndex++;
-        timeout = setTimeout(typeWriter, 100);
+        if (currentIndex <= fullText.length) {
+          timeout = setTimeout(typeWriter, 100);
+        }
       }
     };
 
