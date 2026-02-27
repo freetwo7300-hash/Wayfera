@@ -1,0 +1,70 @@
+{
+  "nav": {
+    "home": "Inicio",
+    "destinations": "Destinos",
+    "services": "Servicios",
+    "about": "Acerca de",
+    "contact": "Contacto"
+  },
+  "hero": {
+    "title": "Descubre Destinos",
+    "subtitle": "Increíbles",
+    "description": "Experimenta los destinos más impresionantes del mundo con nuestras experiencias de viaje curadas. Desde playas vírgenes hasta montañas majestuosas, tu próxima aventura te espera.",
+    "cta": "Explorar Ahora", 
+    "book": "Reservar Viaje"
+  },
+  "destinations": {
+    "title": "Destinos Populares",
+    "subtitle": "Explora los lugares más increíbles del mundo",
+    "filters": {
+      "all": "Todos",
+      "beach": "Playa",
+      "mountain": "Montaña",
+      "city": "Ciudad",
+      "adventure": "Aventura"
+    }
+  },
+  "services": {
+    "title": "Nuestros Servicios",
+    "subtitle": "Todo lo que necesitas para el viaje perfecto",
+    "flight": {
+      "title": "Reserva de Vuelos",
+      "description": "Encuentra los mejores vuelos a precios inmejorables"
+    },
+    "hotel": {
+      "title": "Reservas de Hoteles",
+      "description": "Alojamientos de lujo en todo el mundo"
+    },
+    "guide": {
+      "title": "Guías Turísticos",
+      "description": "Guías locales expertos para experiencias auténticas"
+    },
+    "support": {
+      "title": "Soporte 24/7",
+      "description": "Asistencia las 24 horas para tu viaje"
+    }
+  },
+  "booking": {
+    "title": "Reserva el Viaje de Tus Sueños",
+    "steps": {
+      "destination": "Destino",
+      "details": "Detalles",
+      "payment": "Pago"
+    },
+    "form": {
+      "destination": "¿A dónde te gustaría ir?",
+      "checkin": "Fecha de Entrada",
+      "checkout": "Fecha de Salida",
+      "guests": "Huéspedes",
+      "adults": "Adultos", 
+      "children": "Niños",
+      "submit": "Reservar Ahora"
+    }
+  },
+  "footer": {
+    "description": "Tu socio de confianza para experiencias de viaje inolvidables alrededor del mundo.",
+    "quickLinks": "Enlaces Rápidos",
+    "contact": "Información de Contacto",
+    "rights": "Todos los derechos reservados."
+  }
+}

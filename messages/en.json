@@ -1,0 +1,70 @@
+{
+  "nav": {
+    "home": "Home",
+    "destinations": "Destinations", 
+    "services": "Services",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "hero": {
+    "title": "Discover Amazing",
+    "subtitle": "Destinations",
+    "description": "Experience the world's most breathtaking destinations with our curated travel experiences. From pristine beaches to majestic mountains, your next adventure awaits.",
+    "cta": "Explore Now",
+    "book": "Book Trip"
+  },
+  "destinations": {
+    "title": "Popular Destinations",
+    "subtitle": "Explore the world's most incredible places",
+    "filters": {
+      "all": "All",
+      "beach": "Beach",
+      "mountain": "Mountain", 
+      "city": "City",
+      "adventure": "Adventure"
+    }
+  },
+  "services": {
+    "title": "Our Services",
+    "subtitle": "Everything you need for the perfect trip",
+    "flight": {
+      "title": "Flight Booking",
+      "description": "Find the best flights at unbeatable prices"
+    },
+    "hotel": {
+      "title": "Hotel Reservations", 
+      "description": "Luxury accommodations worldwide"
+    },
+    "guide": {
+      "title": "Tour Guides",
+      "description": "Expert local guides for authentic experiences"
+    },
+    "support": {
+      "title": "24/7 Support",
+      "description": "Round-the-clock assistance for your journey"
+    }
+  },
+  "booking": {
+    "title": "Book Your Dream Trip",
+    "steps": {
+      "destination": "Destination",
+      "details": "Details", 
+      "payment": "Payment"
+    },
+    "form": {
+      "destination": "Where would you like to go?",
+      "checkin": "Check-in Date",
+      "checkout": "Check-out Date",
+      "guests": "Guests",
+      "adults": "Adults",
+      "children": "Children",
+      "submit": "Book Now"
+    }
+  },
+  "footer": {
+    "description": "Your trusted partner for unforgettable travel experiences around the globe.",
+    "quickLinks": "Quick Links",
+    "contact": "Contact Info",
+    "rights": "All rights reserved."
+  }
+}
