@@ -7,16 +7,20 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Card, CardContent } from '@/components/ui/card';
-import { Calendar, MapPin, Users, CreditCard, ArrowRight, ArrowLeft, Check } from 'lucide-react';
+import { Calendar as CalendarIcon, MapPin, Users, CreditCard, ArrowRight, ArrowLeft, Check } from 'lucide-react';
+import { Calendar } from '@/components/ui/calendar';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { z } from 'zod';
 import toast from 'react-hot-toast';
+import { format } from 'date-fns';
+import { cn } from '@/lib/utils';
 
 const bookingSchema = z.object({
   destination: z.string().min(1, 'Destination is required'),
-  checkin: z.string().min(1, 'Check-in date is required'),
-  checkout: z.string().min(1, 'Check-out date is required'),
+  checkin: z.date(),
+  checkout: z.date(),
   adults: z.number().min(1, 'At least 1 adult is required'),
   children: z.number().min(0),
   email: z.string().email('Valid email is required'),
@@ -24,13 +28,19 @@ const bookingSchema = z.object({
   cardNumber: z.string().min(16, 'Valid card number is required'),
   expiryDate: z.string().min(1, 'Expiry date is required'),
   cvv: z.string().min(3, 'Valid CVV is required')
+}).refine((data) => data.checkin, {
+  message: "Check-in date is required",
+  path: ["checkin"],
+}).refine((data) => data.checkout, {
+  message: "Check-out date is required",
+  path: ["checkout"],
 });
 
 type BookingFormData = z.infer<typeof bookingSchema>;
 
 const steps = [
   { id: 'destination', icon: MapPin, title: 'Destination' },
-  { id: 'details', icon: Calendar, title: 'Details' },
+  { id: 'details', icon: CalendarIcon, title: 'Details' },
   { id: 'payment', icon: CreditCard, title: 'Payment' }
 ];
 
@@ -38,6 +48,8 @@ export function BookingSection() {
   const t = useTranslations('booking');
   const [currentStep, setCurrentStep] = useState(0);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [checkinDate, setCheckinDate] = useState<Date>();
+  const [checkoutDate, setCheckoutDate] = useState<Date>();
 
   const {
     register,
@@ -195,32 +207,72 @@ export function BookingSection() {
 
                       <div className="grid md:grid-cols-2 gap-6">
                         <div>
-                          <Label htmlFor="checkin" className="text-lg font-medium">
+                          <Label className="text-lg font-medium">
                             Check-in Date
                           </Label>
-                          <Input
-                            id="checkin"
-                            type="date"
-                            {...register('checkin')}
-                            className="mt-2 h-14 text-lg"
-                          />
+                          <Popover>
+                            <PopoverTrigger asChild>
+                              <Button
+                                variant="outline"
+                                className={cn(
+                                  "w-full h-14 mt-2 justify-start text-left font-normal text-lg",
+                                  !checkinDate && "text-muted-foreground"
+                                )}
+                              >
+                                <CalendarIcon className="mr-2 h-5 w-5" />
+                                {checkinDate ? format(checkinDate, "MM/dd/yyyy") : <span>mm/dd/yyyy</span>}
+                              </Button>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-auto p-0" align="start">
+                              <Calendar
+                                mode="single"
+                                selected={checkinDate}
+                                onSelect={(date) => {
+                                  setCheckinDate(date);
+                                  if (date) setValue('checkin', date);
+                                }}
+                                initialFocus
+                                disabled={(date) => date < new Date()}
+                              />
+                            </PopoverContent>
+                          </Popover>
                           {errors.checkin && (
-                            <p className="text-red-500 text-sm mt-1">{errors.checkin.message}</p>
+                            <p className="text-red-500 text-sm mt-1">{errors.checkin.message as string}</p>
                           )}
                         </div>
 
                         <div>
-                          <Label htmlFor="checkout" className="text-lg font-medium">
+                          <Label className="text-lg font-medium">
                             Check-out Date
                           </Label>
-                          <Input
-                            id="checkout"
-                            type="date"
-                            {...register('checkout')}
-                            className="mt-2 h-14 text-lg"
-                          />
+                          <Popover>
+                            <PopoverTrigger asChild>
+                              <Button
+                                variant="outline"
+                                className={cn(
+                                  "w-full h-14 mt-2 justify-start text-left font-normal text-lg",
+                                  !checkoutDate && "text-muted-foreground"
+                                )}
+                              >
+                                <CalendarIcon className="mr-2 h-5 w-5" />
+                                {checkoutDate ? format(checkoutDate, "MM/dd/yyyy") : <span>mm/dd/yyyy</span>}
+                              </Button>
+                            </PopoverTrigger>
+                            <PopoverContent className="w-auto p-0" align="start">
+                              <Calendar
+                                mode="single"
+                                selected={checkoutDate}
+                                onSelect={(date) => {
+                                  setCheckoutDate(date);
+                                  if (date) setValue('checkout', date);
+                                }}
+                                initialFocus
+                                disabled={(date) => date < (checkinDate || new Date())}
+                              />
+                            </PopoverContent>
+                          </Popover>
                           {errors.checkout && (
-                            <p className="text-red-500 text-sm mt-1">{errors.checkout.message}</p>
+                            <p className="text-red-500 text-sm mt-1">{errors.checkout.message as string}</p>
                           )}
                         </div>
                       </div>
