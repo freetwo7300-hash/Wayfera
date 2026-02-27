@@ -42,8 +42,10 @@ export function Header() {
   }, []);
 
   const switchLocale = (newLocale: string) => {
-    const newPath = pathname.replace(`/${locale}`, `/${newLocale}`);
-    router.push(newPath);
+    // Get the path without the locale prefix
+    const pathWithoutLocale = pathname.replace(`/${locale}`, '') || '/';
+    // Navigate to the same path with the new locale
+    router.push(`/${newLocale}${pathWithoutLocale}`);
   };
 
   const navItems = [
