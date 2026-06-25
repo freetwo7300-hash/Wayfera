@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
@@ -20,9 +20,19 @@ import {
   ArrowRight, 
   Check,
   Star,
-  Quote
+  Quote,
+  Loader
 } from 'lucide-react';
 import Image from 'next/image';
+
+interface Testimonial {
+  id: number;
+  name: string;
+  location: string;
+  rating: number;
+  text: string;
+  image: string;
+}
 
 const services = [
   {
@@ -47,37 +57,28 @@ const services = [
   }
 ];
 
-const testimonials = [
-  {
-    id: 1,
-    name: 'Sarah Johnson',
-    location: 'New York, USA',
-    rating: 5,
-    text: 'Wayfera made our dream vacation to Greece absolutely perfect. Every detail was handled with care.',
-    image: 'https://images.pexels.com/photos/1239291/pexels-photo-1239291.jpeg'
-  },
-  {
-    id: 2,
-    name: 'Ahmed Al-Rashid',
-    location: 'Dubai, UAE',
-    rating: 5,
-    text: 'Outstanding service and attention to detail. The local guides were incredible and very knowledgeable.',
-    image: 'https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg'
-  },
-  {
-    id: 3,
-    name: 'Maria Rodriguez',
-    location: 'Barcelona, Spain',
-    rating: 5,
-    text: 'The best travel experience we\'ve ever had. Professional, reliable, and truly caring about our needs.',
-    image: 'https://images.pexels.com/photos/1181686/pexels-photo-1181686.jpeg'
-  }
-];
-
 export function ServicesSection() {
   const t = useTranslations('services');
   const locale = useLocale();
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchTestimonials() {
+      try {
+        const response = await fetch('/api/testimonials');
+        const data = await response.json();
+        setTestimonials(data);
+      } catch (error) {
+        console.error('Error fetching testimonials:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchTestimonials();
+  }, []);
 
   return (
     <section id="services" className="py-20 bg-white dark:bg-gray-800">
@@ -189,66 +190,72 @@ export function ServicesSection() {
             What Our Travelers Say
           </h3>
 
-          <div className="relative max-w-4xl mx-auto">
-            <div className="glass glass-dark p-8 lg:p-12 rounded-3xl">
-              <Quote className="w-12 h-12 text-blue-600 dark:text-blue-400 mb-6 mx-auto" />
-              
-              <motion.div
-                key={currentTestimonial}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.5 }}
-                className="text-center"
-              >
-                <p className="text-xl lg:text-2xl text-gray-700 dark:text-gray-300 mb-8 leading-relaxed">
-                  "{testimonials[currentTestimonial].text}"
-                </p>
-
-                <div className="flex items-center justify-center mb-6">
-                  {[...Array(testimonials[currentTestimonial].rating)].map((_, i) => (
-                    <Star key={i} className="w-5 h-5 text-yellow-500 fill-yellow-500" />
-                  ))}
-                </div>
-
-                <div className="flex items-center justify-center">
-                  <div className="relative w-16 h-16 mr-4">
-                    <Image
-                      src={testimonials[currentTestimonial].image}
-                      alt={testimonials[currentTestimonial].name}
-                      fill
-                      sizes="64px"
-                      className="rounded-full object-cover"
-                      loading="lazy"
-                    />
-                  </div>
-                  <div className="text-left">
-                    <h4 className="font-semibold text-gray-900 dark:text-white">
-                      {testimonials[currentTestimonial].name}
-                    </h4>
-                    <p className="text-gray-600 dark:text-gray-400 text-sm">
-                      {testimonials[currentTestimonial].location}
-                    </p>
-                  </div>
-                </div>
-              </motion.div>
+          {loading || testimonials.length === 0 ? (
+            <div className="flex justify-center items-center py-12">
+              <Loader className="w-8 h-8 text-blue-600 animate-spin" />
             </div>
+          ) : (
+            <div className="relative max-w-4xl mx-auto">
+              <div className="glass glass-dark p-8 lg:p-12 rounded-3xl">
+                <Quote className="w-12 h-12 text-blue-600 dark:text-blue-400 mb-6 mx-auto" />
+                
+                <motion.div
+                  key={currentTestimonial}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.5 }}
+                  className="text-center"
+                >
+                  <p className="text-xl lg:text-2xl text-gray-700 dark:text-gray-300 mb-8 leading-relaxed">
+                    "{testimonials[currentTestimonial].text}"
+                  </p>
 
-            {/* Navigation Dots */}
-            <div className="flex justify-center mt-8 space-x-2">
-              {testimonials.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentTestimonial(index)}
-                  className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                    index === currentTestimonial
-                      ? 'bg-blue-600 w-8'
-                      : 'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500'
-                  }`}
-                />
-              ))}
+                  <div className="flex items-center justify-center mb-6">
+                    {[...Array(testimonials[currentTestimonial].rating)].map((_, i) => (
+                      <Star key={i} className="w-5 h-5 text-yellow-500 fill-yellow-500" />
+                    ))}
+                  </div>
+
+                  <div className="flex items-center justify-center">
+                    <div className="relative w-16 h-16 mr-4">
+                      <Image
+                        src={testimonials[currentTestimonial].image}
+                        alt={testimonials[currentTestimonial].name}
+                        fill
+                        sizes="64px"
+                        className="rounded-full object-cover"
+                        loading="lazy"
+                      />
+                    </div>
+                    <div className="text-left">
+                      <h4 className="font-semibold text-gray-900 dark:text-white">
+                        {testimonials[currentTestimonial].name}
+                      </h4>
+                      <p className="text-gray-600 dark:text-gray-400 text-sm">
+                        {testimonials[currentTestimonial].location}
+                      </p>
+                    </div>
+                  </div>
+                </motion.div>
+              </div>
+
+              {/* Navigation Dots */}
+              <div className="flex justify-center mt-8 space-x-2">
+                {testimonials.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => setCurrentTestimonial(index)}
+                    className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                      index === currentTestimonial
+                        ? 'bg-blue-600 w-8'
+                        : 'bg-gray-300 dark:bg-gray-600 hover:bg-gray-400 dark:hover:bg-gray-500'
+                    }`}
+                  />
+                ))}
+              </div>
             </div>
-          </div>
+          )}
         </motion.div>
       </div>
     </section>
