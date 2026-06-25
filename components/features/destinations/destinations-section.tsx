@@ -1,85 +1,56 @@
 "use client";
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { MapPin, Star, Heart, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 
-const destinations = [
-  {
-    id: 1,
-    name: 'Santorini, Greece',
-    category: 'beach',
-    image: 'https://images.pexels.com/photos/161815/santorini-oia-greece-161815.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-    price: 1299,
-    rating: 4.9,
-    description: 'Stunning sunsets and white-washed buildings',
-    duration: '7 days'
-  },
-  {
-    id: 2,
-    name: 'Swiss Alps, Switzerland',
-    category: 'mountain',
-    image: 'https://images.pexels.com/photos/417074/pexels-photo-417074.jpeg',
-    price: 1899,
-    rating: 4.8,
-    description: 'Breathtaking mountain views and skiing',
-    duration: '5 days'
-  },
-  {
-    id: 3,
-    name: 'Tokyo, Japan',
-    category: 'city',
-    image: 'https://images.pexels.com/photos/402028/pexels-photo-402028.jpeg',
-    price: 1599,
-    rating: 4.9,
-    description: 'Modern city with rich cultural heritage',
-    duration: '6 days'
-  },
-  {
-    id: 4,
-    name: 'Patagonia, Chile',
-    category: 'adventure',
-    image: 'https://images.pexels.com/photos/1770809/pexels-photo-1770809.jpeg',
-    price: 2199,
-    rating: 4.7,
-    description: 'Epic hiking and glacier adventures',
-    duration: '10 days'
-  },
-  {
-    id: 5,
-    name: 'Maldives',
-    category: 'beach',
-    image: 'https://images.pexels.com/photos/1287460/pexels-photo-1287460.jpeg',
-    price: 2499,
-    rating: 4.9,
-    description: 'Paradise beaches and luxury resorts',
-    duration: '8 days'
-  },
-  {
-    id: 6,
-    name: 'Machu Picchu, Peru',
-    category: 'adventure',
-    image: 'https://images.pexels.com/photos/1519125/pexels-photo-1519125.jpeg',
-    price: 1799,
-    rating: 4.8,
-    description: 'Ancient Incan ruins and trekking',
-    duration: '7 days'
-  }
-];
+type Destination = {
+  id: number;
+  title: string;
+  slug: string;
+  description: string;
+  category: string;
+  image: string;
+  country: string;
+  price: number;
+  duration: number;
+  rating?: number;
+};
 
 const filters = ['all', 'beach', 'mountain', 'city', 'adventure'] as const;
 
 export function DestinationsSection() {
   const t = useTranslations('destinations');
+  const [destinations, setDestinations] = useState<Destination[]>([]);
+  const [loading, setLoading] = useState(true);
   const [activeFilter, setActiveFilter] = useState<string>('all');
   const [favorites, setFavorites] = useState<number[]>([]);
 
-  const filteredDestinations = destinations.filter(dest => 
-    activeFilter === 'all' || dest.category === activeFilter
-  );
+  useEffect(() => {
+    const fetchDestinations = async () => {
+      try {
+        const query = activeFilter === 'all' ? '' : `?category=${activeFilter}`
+        const res = await fetch(`/api/destinations${query}`)
+        if (res.ok) {
+          const data = await res.json()
+          setDestinations(data)
+        }
+      } catch (error) {
+        console.error('Error fetching destinations:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchDestinations()
+  }, [activeFilter])
+
+  if (loading || destinations.length === 0) {
+    return null
+  }
 
   const toggleFavorite = (id: number) => {
     setFavorites(prev => 
@@ -135,7 +106,7 @@ export function DestinationsSection() {
         {/* Destinations Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           <AnimatePresence>
-            {filteredDestinations.map((destination, index) => (
+            {destinations.map((destination, index) => (
               <motion.div
                 key={destination.id}
                 layout
@@ -150,7 +121,7 @@ export function DestinationsSection() {
                 <div className="relative h-64 overflow-hidden">
                   <Image
                     src={destination.image}
-                    alt={destination.name}
+                    alt={destination.title}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover group-hover:scale-110 transition-transform duration-500"
@@ -174,12 +145,14 @@ export function DestinationsSection() {
                   </motion.button>
 
                   {/* Rating Badge */}
-                  <div className="absolute top-4 left-4 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm px-3 py-1 rounded-full flex items-center">
-                    <Star className="w-4 h-4 text-yellow-500 fill-yellow-500 mr-1" />
-                    <span className="text-sm font-semibold text-gray-900 dark:text-white">
-                      {destination.rating}
-                    </span>
-                  </div>
+                  {destination.rating && (
+                    <div className="absolute top-4 left-4 bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm px-3 py-1 rounded-full flex items-center">
+                      <Star className="w-4 h-4 text-yellow-500 fill-yellow-500 mr-1" />
+                      <span className="text-sm font-semibold text-gray-900 dark:text-white">
+                        {destination.rating.toFixed(1)}
+                      </span>
+                    </div>
+                  )}
 
                   {/* Category Badge */}
                   <div className="absolute bottom-4 left-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wide">
@@ -191,7 +164,7 @@ export function DestinationsSection() {
                 <div className="p-6">
                   <div className="flex items-start justify-between mb-3">
                     <h3 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors duration-200">
-                      {destination.name}
+                      {destination.title}
                     </h3>
                     <MapPin className="w-5 h-5 text-gray-400 mt-1 flex-shrink-0" />
                   </div>
@@ -206,13 +179,13 @@ export function DestinationsSection() {
                         ${destination.price}
                       </span>
                       <span className="text-gray-500 dark:text-gray-400 text-sm ml-1">
-                        / {destination.duration}
+                        / {destination.duration} days
                       </span>
                     </div>
 
                     <Button
                       size="sm"
-                      onClick={() => window.location.href = `/en/destinations/${destination.id}`}
+                      onClick={() => window.location.href = `/en/destinations/${destination.slug}`}
                       className="group/btn bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white"
                     >
                       View Details
