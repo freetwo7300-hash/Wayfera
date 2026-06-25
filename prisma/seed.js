@@ -293,6 +293,52 @@ async function main() {
     }),
   ])
 
+  // Seed Features
+  const features = await Promise.all([
+    prisma.feature.create({
+      data: {
+        title: 'Safe & Secure',
+        description: 'Your safety is our priority with 24/7 support and secure bookings',
+        icon: 'Shield',
+      },
+    }),
+    prisma.feature.create({
+      data: {
+        title: 'Best Price Guarantee',
+        description: 'We guarantee the best prices or we\'ll refund the difference',
+        icon: 'Award',
+      },
+    }),
+    prisma.feature.create({
+      data: {
+        title: '24/7 Support',
+        description: 'Our travel experts are available around the clock to assist you',
+        icon: 'Headphones',
+      },
+    }),
+    prisma.feature.create({
+      data: {
+        title: 'No Hidden Fees',
+        description: 'Transparent pricing with no surprise charges or hidden costs',
+        icon: 'DollarSign',
+      },
+    }),
+    prisma.feature.create({
+      data: {
+        title: 'Global Coverage',
+        description: 'Access to 50+ countries and 500+ destinations worldwide',
+        icon: 'Globe',
+      },
+    }),
+    prisma.feature.create({
+      data: {
+        title: 'Personalized Service',
+        description: 'Tailored experiences designed around your preferences',
+        icon: 'Heart',
+      },
+    }),
+  ])
+
   // Seed Testimonials
   await Promise.all([
     prisma.testimonial.create({
@@ -337,6 +383,7 @@ async function main() {
   console.log(`✓ ${users.length} users`)
   console.log(`✓ ${destinations.length} destinations`)
   console.log(`✓ ${packages.length} packages`)
+  console.log(`✓ ${features.length} features`)
   console.log(`✓ ${await prisma.booking.count()} bookings`)
   console.log(`✓ ${await prisma.review.count()} reviews`)
   console.log(`✓ ${await prisma.testimonial.count()} testimonials`)

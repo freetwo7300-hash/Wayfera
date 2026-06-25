@@ -101,3 +101,13 @@ model Testimonial {
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 }
+
+// Features model for "Why Choose Us" section
+model Feature {
+  id           Int      @id @default(autoincrement())
+  title        String
+  description  String
+  icon         String   // Icon name from lucide-react
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
