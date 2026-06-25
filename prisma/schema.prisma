@@ -10,11 +10,94 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-// Example models - customize based on your needs
+// User model for travel bookings and accounts
 model User {
-  id    Int     @id @default(autoincrement())
-  email String  @unique
-  name  String?
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id           Int      @id @default(autoincrement())
+  email        String   @unique
+  name         String?
+  phone        String?
+  avatar       String?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  bookings     Booking[]
+  reviews      Review[]
+}
+
+// Destinations model
+model Destination {
+  id           Int      @id @default(autoincrement())
+  title        String
+  slug         String   @unique
+  description  String
+  category     String   // beach, mountain, city, adventure
+  image        String
+  imageGallery String[] // Array of gallery images
+  country      String
+  region       String
+  latitude     Float?
+  longitude    Float?
+  price        Int      // Price in USD
+  duration     Int      // Duration in days
+  highlights   String[] // Array of highlights
+  bestTime     String   // Best time to visit
+  reviews      Review[]
+  bookings     Booking[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+// Travel Packages/Services
+model Package {
+  id           Int      @id @default(autoincrement())
+  title        String
+  description  String
+  type         String   // flight, hotel, guide, support
+  price        Int      // Price in USD
+  features     String[] // Array of features
+  rating       Float?
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+// Bookings model
+model Booking {
+  id              Int      @id @default(autoincrement())
+  userId          Int
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  destinationId   Int
+  destination     Destination @relation(fields: [destinationId], references: [id], onDelete: Cascade)
+  status          String   @default("pending") // pending, confirmed, cancelled
+  checkInDate     DateTime
+  checkOutDate    DateTime
+  numberOfGuests  Int
+  totalPrice      Int
+  notes           String?
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+// Reviews model
+model Review {
+  id              Int      @id @default(autoincrement())
+  userId          Int
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  destinationId   Int
+  destination     Destination @relation(fields: [destinationId], references: [id], onDelete: Cascade)
+  rating          Int      // 1-5 rating
+  title           String
+  text            String
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+// Testimonials model
+model Testimonial {
+  id           Int      @id @default(autoincrement())
+  name         String
+  location     String
+  image        String
+  rating       Int      // 1-5 rating
+  text         String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }
