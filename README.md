@@ -123,296 +123,66 @@
 
 ---
 
-## 🚀 Getting Started
+## 🚀 Quick Start
 
-### Prerequisites
-
-Ensure you have the following installed:
-- **Node.js** 18.17 or later
-- **npm** 9.0 or later (or **yarn** 1.22+)
-- **Git** for version control
-
-### Installation
-
-1. **Clone the repository**
-```bash
-git clone https://github.com/yourusername/wayfera.git
-cd wayfera
-```
-
-2. **Install dependencies**
-```bash
-npm install
-```
-
-3. **Set up environment variables**
-```bash
-cp .env.example .env.local
-```
-
-Edit `.env.local` with your configuration:
-```env
-NEXT_PUBLIC_SITE_URL=http://localhost:3000
-```
-
-4. **Run the development server**
-```bash
-npm run dev
-```
-
-5. **Open your browser**
-```
-http://localhost:3000
-```
-
-### Build for Production
+See [docs/SETUP.md](docs/SETUP.md) for detailed setup instructions.
 
 ```bash
-# Create optimized production build
-npm run build
-
-# Start production server
-npm start
+npm install && npm run dev
 ```
+
+Open `http://localhost:3000`
 
 ---
 
 ## 📁 Project Structure
 
+See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for detailed architecture.
+
 ```
 wayfera/
-├── app/                          # Next.js App Router
-│   ├── [locale]/                # Internationalized routes
-│   │   ├── about/              # About page
-│   │   ├── booking/            # Booking wizard
-│   │   ├── contact/            # Contact form
-│   │   ├── cookies/            # Cookie policy
-│   │   ├── destinations/       # Destinations listing
-│   │   │   └── [id]/          # Destination detail pages
-│   │   ├── privacy/            # Privacy policy
-│   │   ├── services/           # Services page
-│   │   ├── terms/              # Terms of service
-│   │   ├── error.tsx           # Error boundary
-│   │   ├── globals.css         # Global styles
-│   │   ├── layout.tsx          # Root layout
-│   │   ├── loading.tsx         # Loading state
-│   │   ├── not-found.tsx       # 404 page
-│   │   └── page.tsx            # Home page
-│   ├── global-error.tsx        # Global error handler
-│   ├── icon.svg                # App icon
-│   ├── layout.tsx              # Root layout wrapper
-│   ├── page.tsx                # Root redirect
-│   ├── robots.ts               # Robots.txt generator
-│   └── sitemap.ts              # Sitemap generator
-├── components/
-│   ├── features/               # Feature-specific components
-│   │   ├── booking/           # Booking components
-│   │   ├── destinations/      # Destination components
-│   │   ├── services/          # Service components
-│   │   └── testimonials/      # Testimonial components
-│   ├── layout/                # Layout components
-│   │   ├── footer.tsx
-│   │   ├── header.tsx
-│   │   └── hero-section.tsx
-│   ├── providers/             # Context providers
-│   │   └── theme-provider.tsx
-│   ├── shared/                # Shared components
-│   │   ├── cookie-consent.tsx
-│   │   ├── empty-state.tsx
-│   │   ├── error-boundary.tsx
-│   │   ├── json-ld.tsx
-│   │   ├── network-error.tsx
-│   │   └── performance-optimizer.tsx
-│   └── ui/                    # shadcn/ui components
-│       ├── button.tsx
-│       ├── card.tsx
-│       ├── input.tsx
-│       └── ... (50+ components)
-├── config/                    # Configuration files
-│   ├── navigation.ts          # Navigation config
-│   └── site.ts                # Site metadata
-├── hooks/                     # Custom React hooks
-│   ├── use-cache.ts
-│   ├── use-local-storage.ts
-│   ├── use-session-storage.ts
-│   └── use-toast.ts
-├── lib/                       # Utility libraries
-│   ├── constants.ts           # App constants
-│   ├── seo.ts                 # SEO utilities
-│   ├── storage.ts             # Storage utilities
-│   └── utils.ts               # Helper functions
-├── messages/                  # i18n translation files
-│   ├── ar.json               # Arabic
-│   ├── en.json               # English
-│   ├── es.json               # Spanish
-│   └── fr.json               # French
-├── public/                    # Static assets
-│   └── manifest.json         # PWA manifest
-├── types/                     # TypeScript types
-│   └── index.ts
-├── .env.production           # Production environment
-├── .eslintrc.json            # ESLint config
-├── .gitignore                # Git ignore rules
-├── components.json           # shadcn/ui config
-├── i18n.ts                   # i18n configuration
-├── middleware.ts             # Next.js middleware
-├── netlify.toml              # Netlify config
-├── next.config.js            # Next.js config
-├── package.json              # Dependencies
-├── postcss.config.js         # PostCSS config
-├── tailwind.config.ts        # Tailwind config
-└── tsconfig.json             # TypeScript config
+├── docs/                    # Developer documentation
+│   ├── SETUP.md            # Installation & setup
+│   ├── DATABASE.md         # Database configuration
+│   └── ARCHITECTURE.md     # Project architecture
+├── app/                    # Next.js App Router
+│   ├── [locale]/          # i18n routes
+│   ├── globals.css        # Global styles
+│   ├── layout.tsx         # Root layout
+│   └── robots.ts          # SEO robots
+├── components/            # React components
+│   ├── features/          # Feature components
+│   ├── layout/            # Layout components
+│   ├── shared/            # Shared utilities
+│   └── ui/                # shadcn/ui components
+├── lib/                   # Utilities
+│   ├── prisma.ts         # Database client
+│   └── utils.ts          # Helpers
+├── config/                # Configuration
+├── messages/              # i18n translations
+├── prisma/                # Database schema
+└── types/                 # TypeScript types
 ```
 
 ---
 
 ## ⚙️ Configuration
 
+See [docs/DATABASE.md](docs/DATABASE.md) for database setup.
+
 ### Environment Variables
 
-Create `.env.local` for local development:
-
 ```env
-# Site Configuration
 NEXT_PUBLIC_SITE_URL=http://localhost:3000
 NEXT_PUBLIC_SITE_NAME=Wayfera
-
-# Optional: Analytics
-NEXT_PUBLIC_GA_ID=your-ga-id
+DATABASE_URL=postgresql://...
 ```
-
-### Tailwind Configuration
-
-All styles are centralized in `tailwind.config.ts`:
-- CSS variables for theming
-- Custom colors and gradients
-- Date input styling
-- Calendar component styling
-- Utility classes (glass, text-shadow, typewriter)
-
-### Next.js Configuration
-
-`next.config.js` includes:
-- Image optimization (AVIF, WebP)
-- Package imports optimization
-- SWC minification
-- Security headers
-- Caching headers
-
----
-
-## 🌍 Internationalization
-
-### Supported Languages
-
-| Language | Code | Direction | Font |
-|----------|------|-----------|------|
-| English | `en` | LTR | Oswald |
-| Arabic | `ar` | RTL | Noto Kufi Arabic |
-| French | `fr` | LTR | Oswald |
-| Spanish | `es` | LTR | Oswald |
-
-### Adding a New Language
-
-1. Create translation file: `messages/[locale].json`
-2. Add locale to `middleware.ts`:
-```typescript
-locales: ['en', 'ar', 'fr', 'es', 'de'], // Add 'de'
-```
-3. Update `i18n.ts` to handle new locale
-4. Add translations for all keys
-
-### Translation Structure
-
-```json
-{
-  "nav": { "home": "Home", "about": "About" },
-  "hero": { "title": "Discover Your Next", "subtitle": "..." },
-  "destinations": { "title": "Popular Destinations" },
-  "services": { "title": "Our Services" },
-  "booking": { "title": "Book Your Trip" },
-  "footer": { "description": "..." }
-}
-```
-
----
-
-## 🚀 Deployment
-
-### Netlify (Current)
-
-The app is deployed at [wayfera.netlify.app](https://wayfera.netlify.app)
-
-**Deploy Steps:**
-1. Push to GitHub
-2. Connect repository in Netlify
-3. Build settings are in `netlify.toml`
-4. Deploy automatically on push
-
-### Vercel (Recommended for Next.js)
-
-```bash
-# Install Vercel CLI
-npm i -g vercel
-
-# Deploy
-vercel
-```
-
-### Docker
-
-```dockerfile
-FROM node:18-alpine
-WORKDIR /app
-COPY package*.json ./
-RUN npm ci
-COPY . .
-RUN npm run build
-EXPOSE 3000
-CMD ["npm", "start"]
-```
-
-### Manual Deployment
-
-```bash
-npm run build
-npm start
-```
-
----
-
-## 📝 Scripts
-
-| Command | Description |
-|---------|-------------|
-| `npm run dev` | Start development server on port 3000 |
-| `npm run build` | Create optimized production build |
-| `npm start` | Start production server |
-| `npm run lint` | Run ESLint for code quality |
 
 ---
 
 ## 🤝 Contributing
 
-We welcome contributions! Please see [CONTRIBUTING.md](CONTRIBUTING.md) for details.
-
-### Development Workflow
-
-1. Fork the repository
-2. Create a feature branch: `git checkout -b feature/amazing-feature`
-3. Make your changes
-4. Run tests: `npm run lint`
-5. Commit: `git commit -m 'Add amazing feature'`
-6. Push: `git push origin feature/amazing-feature`
-7. Open a Pull Request
-
-### Code Style
-
-- Use TypeScript for type safety
-- Follow ESLint rules
-- Use named exports over default exports
-- Write meaningful commit messages
-- Add comments for complex logic
+See [CONTRIBUTING.md](CONTRIBUTING.md) for contribution guidelines.
 
 ---
 
