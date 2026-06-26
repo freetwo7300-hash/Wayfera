@@ -2,8 +2,11 @@
 
 import { Header, Footer } from '@/components/layout';
 import { motion } from 'framer-motion';
+import { useTranslations } from 'next-intl';
 
 export default function TermsOfServicePage() {
+  const t = useTranslations('legal.terms');
+
   return (
     <main className="overflow-hidden">
       <Header />
@@ -16,160 +19,160 @@ export default function TermsOfServicePage() {
             transition={{ duration: 0.6 }}
           >
             <h1 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-6">
-              Terms of Service
+              {t('title')}
             </h1>
             <p className="text-gray-600 dark:text-gray-400 mb-8">
-              Last updated: {new Date().toLocaleDateString()}
+              {t('lastUpdated')} {new Date().toLocaleDateString()}
             </p>
 
-            <div className="prose prose-lg dark:prose-invert max-w-none">
-              <section className="mb-8">
+            <div className="prose prose-lg dark:prose-invert max-w-none space-y-8">
+              {/* Agreement to Terms */}
+              <section>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                  1. Agreement to Terms
+                  {t('sections.agreement.title')}
                 </h2>
-                <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  By accessing or using Wayfera's services, you agree to be bound by these Terms of Service and all applicable laws and regulations. If you do not agree with any of these terms, you are prohibited from using or accessing our services.
+                <p className="text-gray-700 dark:text-gray-300">
+                  {t('sections.agreement.content')}
                 </p>
               </section>
 
-              <section className="mb-8">
+              {/* Use License */}
+              <section>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                  2. Use License
+                  {t('sections.license.title')}
                 </h2>
                 <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  Permission is granted to temporarily access the materials on Wayfera's website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:
+                  {t('sections.license.intro')}
                 </p>
-                <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2 mb-4">
-                  <li>Modify or copy the materials</li>
-                  <li>Use the materials for any commercial purpose</li>
-                  <li>Attempt to decompile or reverse engineer any software</li>
-                  <li>Remove any copyright or proprietary notations</li>
-                  <li>Transfer the materials to another person</li>
+                <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
+                  {t.raw('sections.license.items').map((item: string, idx: number) => (
+                    <li key={idx}>{item}</li>
+                  ))}
                 </ul>
               </section>
 
-              <section className="mb-8">
+              {/* Booking and Reservations */}
+              <section>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                  3. Booking and Reservations
+                  {t('sections.booking.title')}
                 </h2>
                 <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  When you make a booking through Wayfera:
+                  {t('sections.booking.intro')}
                 </p>
-                <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2 mb-4">
-                  <li>You must provide accurate and complete information</li>
-                  <li>You are responsible for all charges incurred</li>
-                  <li>Bookings are subject to availability and confirmation</li>
-                  <li>Prices are subject to change until booking is confirmed</li>
-                  <li>You must comply with all terms and conditions of service providers</li>
+                <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
+                  {t.raw('sections.booking.items').map((item: string, idx: number) => (
+                    <li key={idx}>{item}</li>
+                  ))}
                 </ul>
               </section>
 
-              <section className="mb-8">
+              {/* Payment Terms */}
+              <section>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                  4. Payment Terms
+                  {t('sections.payment.title')}
                 </h2>
-                <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  Payment is required at the time of booking unless otherwise specified. We accept major credit cards and other payment methods as indicated on our website. All prices are in USD unless otherwise stated.
+                <p className="text-gray-700 dark:text-gray-300">
+                  {t('sections.payment.content')}
                 </p>
               </section>
 
-              <section className="mb-8">
+              {/* Cancellation and Refund */}
+              <section>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                  5. Cancellation and Refund Policy
+                  {t('sections.cancellation.title')}
                 </h2>
                 <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  Cancellation policies vary by service and provider:
+                  {t('sections.cancellation.intro')}
                 </p>
-                <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2 mb-4">
-                  <li>Free cancellation up to 48 hours before departure for most services</li>
-                  <li>Cancellations within 48 hours may incur fees</li>
-                  <li>No-shows are non-refundable</li>
-                  <li>Refunds are processed within 7-14 business days</li>
-                  <li>Some services may have different cancellation terms</li>
+                <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
+                  {t.raw('sections.cancellation.items').map((item: string, idx: number) => (
+                    <li key={idx}>{item}</li>
+                  ))}
                 </ul>
               </section>
 
-              <section className="mb-8">
+              {/* Travel Documents */}
+              <section>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                  6. Travel Documents and Requirements
+                  {t('sections.travel_docs.title')}
                 </h2>
                 <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  You are responsible for:
+                  {t('sections.travel_docs.intro')}
                 </p>
-                <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2 mb-4">
-                  <li>Obtaining valid passports and visas</li>
-                  <li>Meeting health and vaccination requirements</li>
-                  <li>Complying with customs and immigration regulations</li>
-                  <li>Obtaining appropriate travel insurance</li>
+                <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
+                  {t.raw('sections.travel_docs.items').map((item: string, idx: number) => (
+                    <li key={idx}>{item}</li>
+                  ))}
                 </ul>
               </section>
 
-              <section className="mb-8">
+              {/* Limitation of Liability */}
+              <section>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                  7. Limitation of Liability
+                  {t('sections.liability.title')}
                 </h2>
                 <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  Wayfera acts as an intermediary between you and service providers. We are not liable for:
+                  {t('sections.liability.intro')}
                 </p>
-                <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2 mb-4">
-                  <li>Acts or omissions of third-party service providers</li>
-                  <li>Delays, cancellations, or changes by service providers</li>
-                  <li>Personal injury, property damage, or loss</li>
-                  <li>Force majeure events (natural disasters, political unrest, etc.)</li>
-                  <li>Indirect, incidental, or consequential damages</li>
+                <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
+                  {t.raw('sections.liability.items').map((item: string, idx: number) => (
+                    <li key={idx}>{item}</li>
+                  ))}
                 </ul>
               </section>
 
-              <section className="mb-8">
+              {/* User Conduct */}
+              <section>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                  8. User Conduct
+                  {t('sections.conduct.title')}
                 </h2>
                 <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  You agree not to:
+                  {t('sections.conduct.intro')}
                 </p>
-                <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2 mb-4">
-                  <li>Use our services for any illegal purpose</li>
-                  <li>Violate any laws or regulations</li>
-                  <li>Infringe on intellectual property rights</li>
-                  <li>Transmit harmful code or malware</li>
-                  <li>Harass or harm other users</li>
-                  <li>Impersonate any person or entity</li>
+                <ul className="list-disc pl-6 text-gray-700 dark:text-gray-300 space-y-2">
+                  {t.raw('sections.conduct.items').map((item: string, idx: number) => (
+                    <li key={idx}>{item}</li>
+                  ))}
                 </ul>
               </section>
 
-              <section className="mb-8">
+              {/* Intellectual Property */}
+              <section>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                  9. Intellectual Property
+                  {t('sections.ip.title')}
                 </h2>
-                <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  All content on this website, including text, graphics, logos, images, and software, is the property of Wayfera or its content suppliers and is protected by international copyright laws.
+                <p className="text-gray-700 dark:text-gray-300">
+                  {t('sections.ip.content')}
                 </p>
               </section>
 
-              <section className="mb-8">
+              {/* Dispute Resolution */}
+              <section>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                  10. Dispute Resolution
+                  {t('sections.dispute.title')}
                 </h2>
-                <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  Any disputes arising from these terms shall be resolved through binding arbitration in accordance with the rules of the American Arbitration Association. You waive your right to participate in class action lawsuits.
+                <p className="text-gray-700 dark:text-gray-300">
+                  {t('sections.dispute.content')}
                 </p>
               </section>
 
-              <section className="mb-8">
+              {/* Changes to Terms */}
+              <section>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                  11. Changes to Terms
+                  {t('sections.changes.title')}
                 </h2>
-                <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  We reserve the right to modify these terms at any time. Changes will be effective immediately upon posting. Your continued use of our services constitutes acceptance of the modified terms.
+                <p className="text-gray-700 dark:text-gray-300">
+                  {t('sections.changes.content')}
                 </p>
               </section>
 
-              <section className="mb-8">
+              {/* Contact Information */}
+              <section>
                 <h2 className="text-2xl font-bold text-gray-900 dark:text-white mb-4">
-                  12. Contact Information
+                  {t('sections.contact.title')}
                 </h2>
                 <p className="text-gray-700 dark:text-gray-300 mb-4">
-                  For questions about these Terms of Service, contact us:
+                  {t('sections.contact.intro')}
                 </p>
                 <ul className="list-none text-gray-700 dark:text-gray-300 space-y-2">
                   <li>Email: legal@wayfera.com</li>
