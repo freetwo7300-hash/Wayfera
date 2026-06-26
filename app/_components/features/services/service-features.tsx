@@ -56,7 +56,7 @@ export function ServiceFeatures() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
           {features.map((feature, index) => {
-            const IconComponent = (Icons as any)[feature.icon] || Icons.Check;
+            const IconComponent = feature.icon ? (Icons as any)[feature.icon] : Icons.Check;
             return (
               <motion.div
                 key={feature.id}

@@ -2,11 +2,7 @@
 
 import { Search } from 'lucide-react';
 import { EmptyState } from '@/app/_components/shared';
-
-interface EmptySearchProps {
-  searchQuery: string;
-  onClear: () => void;
-}
+import { EmptySearchProps } from '@/app/_types';
 
 export function EmptySearch({ searchQuery, onClear }: EmptySearchProps) {
   return (

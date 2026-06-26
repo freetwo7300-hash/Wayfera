@@ -66,6 +66,7 @@ export interface TravelTip {
   icon: string;
   title: string;
   description: string;
+  order: any;
 }
 
 export interface PricingPlan {
@@ -140,6 +141,11 @@ export interface EmptyStateProps {
   icon: any;
   title: string;
   description?: string;
+  action?: {
+    label: string;
+    onClick: () => void;
+  };
+  children?: React.ReactNode;
 }
 
 export interface EmptySearchProps {

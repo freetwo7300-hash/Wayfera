@@ -58,7 +58,7 @@ export function WhyChooseUs() {
         ) : (
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {features.map((feature, index) => {
-              const IconComponent = iconMap[feature.icon] || Shield;
+              const IconComponent = feature.icon ? iconMap[feature.icon] : Shield;
               return (
                 <motion.div
                   key={feature.id}

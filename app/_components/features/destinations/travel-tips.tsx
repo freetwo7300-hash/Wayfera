@@ -3,14 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Lightbulb, Compass, Camera, Shield, Loader } from 'lucide-react';
-
-interface TravelTip {
-  id: number;
-  icon: string;
-  title: string;
-  description: string;
-  order: number;
-}
+import { TravelTip } from '@/app/_types';
 
 const iconMap: Record<string, React.ComponentType<any>> = {
   Compass,

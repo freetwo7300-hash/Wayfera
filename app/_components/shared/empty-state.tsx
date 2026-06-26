@@ -4,17 +4,7 @@ import { motion } from 'framer-motion';
 import { LucideIcon } from 'lucide-react';
 import { Button } from '@/app/_components/ui/button';
 import { ReactNode } from 'react';
-
-interface EmptyStateProps {
-  icon: LucideIcon;
-  title: string;
-  description: string;
-  action?: {
-    label: string;
-    onClick: () => void;
-  };
-  children?: ReactNode;
-}
+import { EmptyStateProps } from '@/app/_types';
 
 export function EmptyState({ 
   icon: Icon, 

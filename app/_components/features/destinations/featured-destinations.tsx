@@ -66,7 +66,7 @@ export function FeaturedDestinations() {
                 <div className="relative h-64 overflow-hidden">
                   <Image
                     src={destination.image}
-                    alt={destination.title}
+                    alt={destination.title || destination.name || 'Destination'}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     className="object-cover group-hover:scale-110 transition-transform duration-500"

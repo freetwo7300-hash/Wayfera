@@ -1,6 +1,4 @@
-interface JsonLdProps {
-  data: Record<string, any>;
-}
+import { JsonLdProps } from '@/app/_types';
 
 export function JsonLd({ data }: JsonLdProps) {
   return (

@@ -15,7 +15,7 @@ export default getRequestConfig(async ({ locale }) => {
   
   for (const file of messageFiles) {
     try {
-      const imported = await import(`../messages/${validLocale}/${file}.json`);
+      const imported = await import(`@/messages/${validLocale}/${file}.json`);
       const fileMessages = imported.default || imported;
       // Namespace the messages under the file name
       messages[file] = fileMessages;

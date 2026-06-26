@@ -5,14 +5,7 @@ import { motion } from 'framer-motion';
 import { MapPin, ArrowRight, Loader } from 'lucide-react';
 import { Button } from '@/app/_components/ui/button';
 import Image from 'next/image';
-
-interface Region {
-  id: number;
-  name: string;
-  description: string;
-  image: string;
-  destinations: number;
-}
+import { Region } from '@/app/_types';
 
 export function PopularRegions() {
   const [regions, setRegions] = useState<Region[]>([]);

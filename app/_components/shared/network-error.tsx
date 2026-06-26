@@ -3,11 +3,7 @@
 import { motion } from 'framer-motion';
 import { WifiOff, RefreshCw } from 'lucide-react';
 import { Button } from '@/app/_components/ui/button';
-
-interface NetworkErrorProps {
-  onRetry?: () => void;
-  message?: string;
-}
+import { NetworkErrorProps } from '@/app/_types';
 
 export function NetworkError({ 
   onRetry, 

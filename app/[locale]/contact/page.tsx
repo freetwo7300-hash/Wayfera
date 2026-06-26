@@ -10,15 +10,9 @@ import { Input } from '@/app/_components/ui/input';
 import { Label } from '@/app/_components/ui/label';
 import { Textarea } from '@/app/_components/ui/textarea';
 import { Card, CardContent } from '@/app/_components/ui/card';
-import { useState as useStateCheck } from 'react';
 import toast from 'react-hot-toast';
 import Image from 'next/image';
-
-interface ContactInfo {
-  email: string;
-  phone: string;
-  address: string;
-}
+import { ContactInfo } from '@/app/_types';
 
 export default function ContactPage() {
   const t = useTranslations();

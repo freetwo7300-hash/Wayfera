@@ -2,12 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { ReactNode } from 'react';
-
-interface OptimizedSectionProps {
-  children: ReactNode;
-  className?: string;
-  delay?: number;
-}
+import { OptimizedSectionProps } from '@/app/_types';
 
 export function OptimizedSection({ children, className = '', delay = 0 }: OptimizedSectionProps) {
   return (

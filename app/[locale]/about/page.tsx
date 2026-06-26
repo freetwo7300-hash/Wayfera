@@ -6,13 +6,7 @@ import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { Award, Users, Globe, Heart } from 'lucide-react';
 import Image from 'next/image';
-
-interface PageStat {
-  id: number;
-  label: string;
-  value: string;
-  icon?: string;
-}
+import { PageStat } from '@/app/_types';
 
 export default function AboutPage() {
   const t = useTranslations();
