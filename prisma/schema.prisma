@@ -34,12 +34,15 @@ model Destination {
   imageGallery String[] // Array of gallery images
   country      String
   region       String
+  regionId     Int?
+  regionRel    Region?  @relation(fields: [regionId], references: [id], onDelete: SetNull)
   latitude     Float?
   longitude    Float?
   price        Int      // Price in USD
   duration     Int      // Duration in days
   highlights   String[] // Array of highlights
   bestTime     String   // Best time to visit
+  featured     Boolean  @default(false)
   reviews      Review[]
   bookings     Booking[]
   createdAt    DateTime @default(now())
@@ -108,6 +111,60 @@ model Feature {
   title        String
   description  String
   icon         String   // Icon name from lucide-react
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+// Regions model for geographic organization
+model Region {
+  id           Int      @id @default(autoincrement())
+  name         String   @unique
+  description  String
+  image        String
+  destinations Destination[]
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+// Pricing Plans model
+model PricingPlan {
+  id           Int      @id @default(autoincrement())
+  name         String   // Basic, Premium, VIP
+  price        Int      // Price in USD
+  description  String
+  features     String[] // Array of feature descriptions
+  popular      Boolean  @default(false)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+// Travel Tips model
+model TravelTip {
+  id           Int      @id @default(autoincrement())
+  title        String
+  description  String
+  icon         String   // Icon name from lucide-react
+  order        Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+// Social Links model
+model SocialLink {
+  id           Int      @id @default(autoincrement())
+  name         String   @unique // facebook, twitter, instagram, youtube
+  url          String
+  icon         String   // Icon name from lucide-react
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+// Contact Information (single settings record)
+model ContactInfo {
+  id           Int      @id @default(autoincrement())
+  email        String
+  phone        String
+  address      String
   createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
 }
