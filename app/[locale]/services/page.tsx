@@ -4,19 +4,21 @@ import { generateSEO, generateBreadcrumbSchema } from '@/app/_lib/seo';
 import { JsonLd } from '@/app/_components/shared';
 import { Metadata } from 'next';
 
-export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
   return generateSEO({
     title: 'Services - Travel Booking & Planning Services',
     description: 'Complete travel services including flight booking, hotel reservations, tour guides, and 24/7 support. Best price guarantee, flexible booking, and expert local guides.',
     keywords: ['travel services', 'flight booking', 'hotel reservation', 'tour guide', 'travel planning', 'vacation services', 'travel support'],
-    locale: params.locale,
+    locale,
   });
 }
 
-export default function ServicesPage({ params }: { params: { locale: string } }) {
+export default async function ServicesPage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
   const breadcrumbs = generateBreadcrumbSchema([
-    { name: 'Home', url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://wayfera.com'}/${params.locale}` },
-    { name: 'Services', url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://wayfera.com'}/${params.locale}/services` },
+    { name: 'Home', url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://wayfera.com'}/${locale}` },
+    { name: 'Services', url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://wayfera.com'}/${locale}/services` },
   ]);
 
   return (

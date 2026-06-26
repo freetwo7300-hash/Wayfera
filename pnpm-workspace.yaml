@@ -35,7 +35,6 @@ minimumReleaseAgeExclude:
   - stripe-replit-sync
 
 packages:
-  - artifacts/*
   - lib/*
   - lib/integrations/*
   - scripts
@@ -70,12 +69,14 @@ autoInstallPeers: false
 
 onlyBuiltDependencies:
   - '@swc/core'
+  - '@parcel/watcher'
   - esbuild
   - msw
-  - unrs-resolver
   - prisma
   - '@prisma/client'
   - '@prisma/engines'
+  - sharp
+  - unrs-resolver
 
 overrides:
   # replit uses linux-x64 only, we can exclude all other platforms

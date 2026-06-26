@@ -21,12 +21,11 @@ const nextConfig = {
     minimumCacheTTL: 60 * 60 * 24 * 365, // 1 year
   },
   experimental: {
-    optimizePackageImports: ['framer-motion', 'lottie-react', 'lucide-react', '@radix-ui/react-icons']
+    optimizePackageImports: ['framer-motion', 'lottie-react', 'lucide-react'],
   },
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },
-  swcMinify: true,
   reactStrictMode: true,
   
   // Headers for caching and security
