@@ -1,0 +1,1 @@
+"use strict";exports.id=8427,exports.ids=[8427],exports.modules={48427:a=>{a.exports=JSON.parse('{"description":"Votre partenaire de confiance pour des exp\xe9riences de voyage inoubliables \xe0 travers le monde.","quickLinks":"Liens Rapides","contact":"Informations de Contact","rights":"Tous droits r\xe9serv\xe9s."}')}};

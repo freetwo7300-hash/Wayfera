@@ -1,5 +1,7 @@
 import { Metadata } from 'next';
 
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://wayfera.com';
+
 interface SEOProps {
   title: string;
   description: string;
@@ -11,6 +13,19 @@ interface SEOProps {
   alternateLocales?: string[];
 }
 
+const DEFAULT_KEYWORDS = [
+  'travel agency',
+  'vacation packages',
+  'tour booking',
+  'travel destinations',
+  'holiday planning',
+  'flight booking',
+  'hotel reservation',
+  'travel guide',
+  'adventure travel',
+  'luxury travel',
+];
+
 export function generateSEO({
   title,
   description,
@@ -19,24 +34,11 @@ export function generateSEO({
   ogType = 'website',
   canonical,
   locale = 'en',
-  alternateLocales = ['en', 'ar', 'es', 'fr']
+  alternateLocales = ['en', 'ar', 'es', 'fr'],
 }: SEOProps): Metadata {
-  const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'https://wayfera.com';
   const fullTitle = `${title} | Wayfera`;
-  const defaultKeywords = [
-    'travel agency',
-    'vacation packages',
-    'tour booking',
-    'travel destinations',
-    'holiday planning',
-    'flight booking',
-    'hotel reservation',
-    'travel guide',
-    'adventure travel',
-    'luxury travel'
-  ];
-
-  const allKeywords = Array.from(new Set([...defaultKeywords, ...keywords]));
+  const allKeywords = Array.from(new Set([...DEFAULT_KEYWORDS, ...keywords]));
+  const canonicalUrl = canonical || `${BASE_URL}/${locale}`;
 
   return {
     title: fullTitle,
@@ -50,18 +52,18 @@ export function generateSEO({
       address: false,
       telephone: false,
     },
-    metadataBase: new URL(baseUrl),
+    metadataBase: new URL(BASE_URL),
     alternates: {
-      canonical: canonical || baseUrl,
-      languages: alternateLocales.reduce((acc, loc) => {
-        acc[loc] = `${baseUrl}/${loc}`;
+      canonical: canonicalUrl,
+      languages: alternateLocales.reduce<Record<string, string>>((acc, loc) => {
+        acc[loc] = `${BASE_URL}/${loc}`;
         return acc;
-      }, {} as Record<string, string>),
+      }, {}),
     },
     openGraph: {
       title: fullTitle,
       description,
-      url: canonical || baseUrl,
+      url: canonicalUrl,
       siteName: 'Wayfera',
       images: [
         {
@@ -72,7 +74,7 @@ export function generateSEO({
         },
       ],
       locale,
-      type: ogType as any,
+      type: ogType as 'website',
     },
     twitter: {
       card: 'summary_large_image',
@@ -92,10 +94,6 @@ export function generateSEO({
         'max-snippet': -1,
       },
     },
-    verification: {
-      google: 'your-google-verification-code',
-      yandex: 'your-yandex-verification-code',
-    },
   };
 }
 
@@ -106,9 +104,9 @@ export function generateOrganizationSchema() {
     '@type': 'TravelAgency',
     name: 'Wayfera',
     description: 'Premium travel agency offering curated travel experiences worldwide',
-    url: process.env.NEXT_PUBLIC_BASE_URL || 'https://wayfera.com',
-    logo: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://wayfera.com'}/logo.png`,
-    image: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://wayfera.com'}/og-image.jpg`,
+    url: BASE_URL,
+    logo: `${BASE_URL}/logo.png`,
+    image: `${BASE_URL}/og-image.jpg`,
     telephone: '+1-234-567-8900',
     email: 'info@wayfera.com',
     address: {
@@ -164,16 +162,18 @@ export function generateTourPackageSchema(tour: {
       price: tour.price,
       priceCurrency: tour.currency || 'USD',
       availability: 'https://schema.org/InStock',
-      url: `${process.env.NEXT_PUBLIC_BASE_URL || 'https://wayfera.com'}/booking`,
+      url: `${BASE_URL}/booking`,
     },
-    aggregateRating: tour.rating
+    ...(tour.rating
       ? {
-          '@type': 'AggregateRating',
-          ratingValue: tour.rating,
-          reviewCount: tour.reviewCount || 100,
-          bestRating: 5,
-          worstRating: 1,
+          aggregateRating: {
+            '@type': 'AggregateRating',
+            ratingValue: tour.rating,
+            reviewCount: tour.reviewCount || 100,
+            bestRating: 5,
+            worstRating: 1,
+          },
         }
-      : undefined,
+      : {}),
   };
 }

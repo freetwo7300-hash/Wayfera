@@ -161,6 +161,7 @@ export interface NetworkErrorProps {
 export interface OptimizedSectionProps {
   children: React.ReactNode;
   className?: string;
+  delay?: number;
 }
 
 export interface ErrorBoundaryProps {

@@ -2,27 +2,25 @@
 
 import { useEffect } from 'react';
 
+/**
+ * Lightweight client hint: honour prefers-reduced-motion.
+ * Preconnect/dns-prefetch hints are now in the static <head> in layout.tsx
+ * so the browser sees them before any JS runs.
+ */
 export function PerformanceOptimizer() {
   useEffect(() => {
-    // Reduce motion for users who prefer it
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    
-    if (mediaQuery.matches) {
+    const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+    if (mq.matches) {
       document.documentElement.style.setProperty('--animation-duration', '0.01ms');
     }
-
-    // Preload critical resources
-    const preloadLink = document.createElement('link');
-    preloadLink.rel = 'preconnect';
-    preloadLink.href = 'https://images.pexels.com';
-    document.head.appendChild(preloadLink);
-
-    // Cleanup
-    return () => {
-      if (preloadLink.parentNode) {
-        preloadLink.parentNode.removeChild(preloadLink);
-      }
+    const handler = (e: MediaQueryListEvent) => {
+      document.documentElement.style.setProperty(
+        '--animation-duration',
+        e.matches ? '0.01ms' : ''
+      );
     };
+    mq.addEventListener('change', handler);
+    return () => mq.removeEventListener('change', handler);
   }, []);
 
   return null;

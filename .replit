@@ -24,16 +24,16 @@ args = "Start application"
 name = "Start application"
 author = "agent"
 
-[[workflows.workflow.tasks]]
-task = "shell.exec"
-args = "next dev -p 3000"
-waitForPort = 3000
-
 [workflows.workflow.metadata]
 outputType = "webview"
 
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "npm run build && next start -p 5000"
+waitForPort = 5000
+
 [agent]
-stack = "PNPM_WORKSPACE"
+stack = "BEST_EFFORT_FALLBACK"
 expertMode = true
 
 [postMerge]
@@ -43,4 +43,6 @@ timeoutMs = 20000
 [userenv]
 
 [userenv.shared]
-PRISMA_DATABASE_URL = "postgres://fc8ca5892331941f2832c6054fe9ef515b35340e367ef86a41fc156048d7b108:sk_R7aZtsR-ExdoDUFyOg3IX@db.prisma.io:5432/postgres?sslmode=require"
+
+[nix]
+channel = "stable-25_05"
