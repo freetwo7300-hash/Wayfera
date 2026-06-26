@@ -1,8 +1,8 @@
-import { Header, Footer, HeroSection } from '@/components/layout';
-import { FeaturedDestinations } from '@/components/features/destinations';
-import { WhyChooseUs, Testimonials, Newsletter } from '@/components/features/testimonials';
-import { generateSEO, generateBreadcrumbSchema } from '@/lib/seo';
-import { JsonLd } from '@/components/shared';
+import { Header, Footer, HeroSection } from '@/app/_components/layout';
+import { FeaturedDestinations } from '@/app/_components/features/destinations';
+import { WhyChooseUs, Testimonials, Newsletter } from '@/app/_components/features/testimonials';
+import { generateSEO, generateBreadcrumbSchema } from '@/app/_lib/seo';
+import { JsonLd } from '@/app/_components/shared';
 import { Metadata } from 'next';
 
 export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {

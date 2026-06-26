@@ -1,15 +1,15 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import { Header, Footer } from '@/components/layout';
+import { Header, Footer } from '@/app/_components/layout';
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Textarea } from '@/components/ui/textarea';
-import { Card, CardContent } from '@/components/ui/card';
+import { Button } from '@/app/_components/ui/button';
+import { Input } from '@/app/_components/ui/input';
+import { Label } from '@/app/_components/ui/label';
+import { Textarea } from '@/app/_components/ui/textarea';
+import { Card, CardContent } from '@/app/_components/ui/card';
 import { useState as useStateCheck } from 'react';
 import toast from 'react-hot-toast';
 import Image from 'next/image';

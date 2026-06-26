@@ -1,6 +1,6 @@
 "use client";
 
-import { Header, Footer } from '@/components/layout';
+import { Header, Footer } from '@/app/_components/layout';
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 

@@ -2,7 +2,7 @@
 
 import { motion } from 'framer-motion';
 import { Home, Search, MapPin, Compass } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/app/_components/ui/button';
 import Link from 'next/link';
 import { useLocale } from 'next-intl';
 

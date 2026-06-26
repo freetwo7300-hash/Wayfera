@@ -2,9 +2,9 @@
 
 import { useEffect, useState } from 'react';
 import { useParams, useRouter } from 'next/navigation';
-import { Header, Footer } from '@/components/layout';
+import { Header, Footer } from '@/app/_components/layout';
 import { motion } from 'framer-motion';
-import { Button } from '@/components/ui/button';
+import { Button } from '@/app/_components/ui/button';
 import { MapPin, Star, Calendar, Users, Clock, Check, ArrowLeft } from 'lucide-react';
 import Image from 'next/image';
 

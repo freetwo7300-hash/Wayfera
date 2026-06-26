@@ -1,5 +1,5 @@
-import { Header, Footer } from '@/components/layout';
-import { BookingSection } from '@/components/features/booking';
+import { Header, Footer } from '@/app/_components/layout';
+import { BookingSection } from '@/app/_components/features/booking';
 import { Metadata } from 'next';
 
 export const metadata: Metadata = {

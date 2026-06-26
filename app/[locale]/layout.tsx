@@ -3,10 +3,10 @@ import type { Metadata } from 'next';
 import { Oswald, Noto_Kufi_Arabic } from 'next/font/google';
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
-import { ThemeProvider } from '@/components/providers';
+import { ThemeProvider } from '@/app/_components/providers';
 import { Toaster } from 'react-hot-toast';
-import { PerformanceOptimizer, JsonLd, CookieConsent } from '@/components/shared';
-import { generateOrganizationSchema } from '@/lib/seo';
+import { PerformanceOptimizer, JsonLd, CookieConsent } from '@/app/_components/shared';
+import { generateOrganizationSchema } from '@/app/_lib/seo';
 
 const oswald = Oswald({ 
   subsets: ['latin'],

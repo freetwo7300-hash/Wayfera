@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from 'react';
-import { Header, Footer } from '@/components/layout';
+import { Header, Footer } from '@/app/_components/layout';
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
 import { Award, Users, Globe, Heart } from 'lucide-react';
