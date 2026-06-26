@@ -27,7 +27,7 @@ export function Header() {
   const [scrolled, setScrolled] = useState(false);
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
-  const t = useTranslations();
+  const t = useTranslations('nav');
   const locale = useLocale();
   const pathname = usePathname();
   const router = useRouter();
@@ -100,7 +100,7 @@ export function Header() {
                         : 'text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400'
                     }`}
                   >
-                    {t(`nav.${item.key}`)}
+                    {t(item.key)}
                     {isActive && (
                       <motion.div
                         layoutId="activeTab"
@@ -239,7 +239,7 @@ export function Header() {
                             : 'text-gray-700 dark:text-gray-300 hover:bg-blue-50 dark:hover:bg-blue-950 hover:text-blue-600 dark:hover:text-blue-400'
                         }`}
                       >
-                        {t(`nav.${item.key}`)}
+                        {t(item.key)}
                       </motion.div>
                     </Link>
                   );
