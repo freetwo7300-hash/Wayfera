@@ -1,9 +1,23 @@
 "use client";
 
+import { useEffect, useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { motion } from 'framer-motion';
-import { Plane, Mail, Phone, MapPin, Facebook, Twitter, Instagram, Youtube } from 'lucide-react';
+import { Plane, Mail, Phone, MapPin } from 'lucide-react';
+import * as Icons from 'lucide-react';
 import Link from 'next/link';
+
+interface ContactInfo {
+  email: string;
+  phone: string;
+  address: string;
+}
+
+interface SocialLink {
+  name: string;
+  url: string;
+  icon: string;
+}
 
 const quickLinks = [
   { key: 'home', href: '#hero' },
@@ -13,16 +27,45 @@ const quickLinks = [
   { key: 'contact', href: '#contact' }
 ];
 
-const socialLinks = [
-  { icon: Facebook, href: '#', label: 'Facebook' },
-  { icon: Twitter, href: '#', label: 'Twitter' },
-  { icon: Instagram, href: '#', label: 'Instagram' },
-  { icon: Youtube, href: '#', label: 'YouTube' }
-];
-
 export function Footer() {
   const t = useTranslations();
   const locale = useLocale();
+  const [contactInfo, setContactInfo] = useState<ContactInfo | null>(null);
+  const [socialLinks, setSocialLinks] = useState<SocialLink[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const [contactRes, socialsRes] = await Promise.all([
+          fetch('/api/contact-info'),
+          fetch('/api/social-links')
+        ]);
+        
+        const contact = await contactRes.json();
+        const socials = await socialsRes.json();
+        
+        setContactInfo(contact);
+        setSocialLinks(socials);
+      } catch (error) {
+        console.error('Error fetching footer data:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  if (loading) {
+    return (
+      <footer className="bg-gray-900 dark:bg-black text-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
+          <div className="text-center">Loading...</div>
+        </div>
+      </footer>
+    );
+  }
 
   return (
     <footer className="bg-gray-900 dark:bg-black text-white">
@@ -51,16 +94,18 @@ export function Footer() {
 
             {/* Social Links */}
             <div className="flex space-x-4">
-              {socialLinks.map((social, index) => {
-                const IconComponent = social.icon;
+              {socialLinks.map((social) => {
+                const IconComponent = (Icons as any)[social.icon] || Icons.Link;
                 return (
                   <motion.a
-                    key={social.label}
-                    href={social.href}
+                    key={social.name}
+                    href={social.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
                     whileHover={{ scale: 1.1, y: -2 }}
                     whileTap={{ scale: 0.95 }}
                     className="w-12 h-12 bg-gray-800 hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 rounded-xl flex items-center justify-center transition-all duration-300"
-                    aria-label={social.label}
+                    aria-label={social.name}
                   >
                     <IconComponent className="w-5 h-5" />
                   </motion.a>
@@ -106,18 +151,26 @@ export function Footer() {
           >
             <h3 className="text-xl font-bold mb-6">{t('footer.contact')}</h3>
             <div className="space-y-4">
-              <div className="flex items-center space-x-3">
-                <Mail className="w-5 h-5 text-blue-400" />
-                <span className="text-gray-300">hello@wayfera.com</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <Phone className="w-5 h-5 text-blue-400" />
-                <span className="text-gray-300">+1 (555) 123-4567</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <MapPin className="w-5 h-5 text-blue-400" />
-                <span className="text-gray-300">123 Travel St, Adventure City</span>
-              </div>
+              {contactInfo && (
+                <>
+                  <div className="flex items-center space-x-3">
+                    <Mail className="w-5 h-5 text-blue-400" />
+                    <a href={`mailto:${contactInfo.email}`} className="text-gray-300 hover:text-blue-400 transition-colors">
+                      {contactInfo.email}
+                    </a>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <Phone className="w-5 h-5 text-blue-400" />
+                    <a href={`tel:${contactInfo.phone}`} className="text-gray-300 hover:text-blue-400 transition-colors">
+                      {contactInfo.phone}
+                    </a>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <MapPin className="w-5 h-5 text-blue-400" />
+                    <span className="text-gray-300">{contactInfo.address}</span>
+                  </div>
+                </>
+              )}
             </div>
           </motion.div>
         </div>

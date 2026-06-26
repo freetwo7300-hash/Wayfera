@@ -149,6 +149,29 @@ model TravelTip {
   updatedAt    DateTime @updatedAt
 }
 
+// Service Process Steps model
+model ProcessStep {
+  id           Int      @id @default(autoincrement())
+  title        String
+  description  String
+  icon         String   // Icon name from lucide-react
+  order        Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+// Page Stats model (for about, home pages, etc.)
+model PageStat {
+  id           Int      @id @default(autoincrement())
+  pageType     String   // 'home', 'about', etc
+  label        String   // 'Countries', 'Clients', etc
+  value        String   // '50+', '1000+', etc
+  icon         String?  // Optional icon name
+  order        Int      @default(0)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
 // Social Links model
 model SocialLink {
   id           Int      @id @default(autoincrement())

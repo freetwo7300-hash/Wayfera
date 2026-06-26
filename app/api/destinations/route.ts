@@ -19,8 +19,7 @@ export async function GET(request: NextRequest) {
         image: true,
         country: true,
         price: true,
-        duration: true,
-        rating: true,
+        duration: true
       },
     })
 

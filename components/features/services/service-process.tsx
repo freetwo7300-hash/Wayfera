@@ -1,32 +1,47 @@
 "use client";
 
+import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Search, Calendar, CreditCard, Plane } from 'lucide-react';
+import * as Icons from 'lucide-react';
 
-const steps = [
-  {
-    icon: Search,
-    title: 'Choose Destination',
-    description: 'Browse our curated destinations and select your dream location'
-  },
-  {
-    icon: Calendar,
-    title: 'Plan Your Trip',
-    description: 'Work with our experts to customize your perfect itinerary'
-  },
-  {
-    icon: CreditCard,
-    title: 'Book & Pay',
-    description: 'Secure your booking with flexible payment options'
-  },
-  {
-    icon: Plane,
-    title: 'Travel & Enjoy',
-    description: 'Embark on your journey with 24/7 support throughout'
-  }
-];
+interface ProcessStep {
+  id: number;
+  icon: string;
+  title: string;
+  description: string;
+  order: number;
+}
 
 export function ServiceProcess() {
+  const [steps, setSteps] = useState<ProcessStep[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchSteps = async () => {
+      try {
+        const response = await fetch('/api/process-steps');
+        const data = await response.json();
+        setSteps(data);
+      } catch (error) {
+        console.error('Error fetching process steps:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchSteps();
+  }, []);
+
+  if (loading) {
+    return (
+      <section className="py-20 bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center">Loading...</div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="py-20 bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-800 dark:via-gray-900 dark:to-gray-800">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -47,10 +62,10 @@ export function ServiceProcess() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {steps.map((step, index) => {
-            const IconComponent = step.icon;
+            const IconComponent = (Icons as any)[step.icon] || Icons.Plane;
             return (
               <motion.div
-                key={index}
+                key={step.id}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}

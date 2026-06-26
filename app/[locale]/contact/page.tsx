@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect, useState } from 'react';
 import { Header, Footer } from '@/components/layout';
 import { motion } from 'framer-motion';
 import { useTranslations } from 'next-intl';
@@ -9,13 +10,37 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Card, CardContent } from '@/components/ui/card';
-import { useState } from 'react';
+import { useState as useStateCheck } from 'react';
 import toast from 'react-hot-toast';
 import Image from 'next/image';
+
+interface ContactInfo {
+  email: string;
+  phone: string;
+  address: string;
+}
 
 export default function ContactPage() {
   const t = useTranslations();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [contactInfo, setContactInfo] = useState<ContactInfo | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchContactInfo = async () => {
+      try {
+        const response = await fetch('/api/contact-info');
+        const data = await response.json();
+        setContactInfo(data);
+      } catch (error) {
+        console.error('Error fetching contact info:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchContactInfo();
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -28,11 +53,11 @@ export default function ContactPage() {
     setIsSubmitting(false);
   };
 
-  const contactInfo = [
-    { icon: Mail, title: 'Email', value: 'info@wayfera.com', link: 'mailto:info@wayfera.com' },
-    { icon: Phone, title: 'Phone', value: '+1 (555) 123-4567', link: 'tel:+15551234567' },
-    { icon: MapPin, title: 'Address', value: '123 Travel Street, Adventure City, AC 12345', link: '#' }
-  ];
+  const contactDetailsItems = contactInfo ? [
+    { icon: Mail, title: 'Email', value: contactInfo.email, link: `mailto:${contactInfo.email}` },
+    { icon: Phone, title: 'Phone', value: contactInfo.phone, link: `tel:${contactInfo.phone}` },
+    { icon: MapPin, title: 'Address', value: contactInfo.address, link: '#' }
+  ] : [];
 
   return (
     <main className="overflow-hidden">
@@ -71,33 +96,35 @@ export default function ContactPage() {
                 </p>
               </div>
 
-              <div className="space-y-6">
-                {contactInfo.map((info, index) => {
-                  const IconComponent = info.icon;
-                  return (
-                    <motion.a
-                      key={index}
-                      href={info.link}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.6, delay: 0.1 * index }}
-                      className="flex items-start space-x-4 p-6 rounded-2xl bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all hover:scale-105"
-                    >
-                      <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center flex-shrink-0">
-                        <IconComponent className="w-6 h-6 text-white" />
-                      </div>
-                      <div>
-                        <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">
-                          {info.title}
-                        </h3>
-                        <p className="text-gray-600 dark:text-gray-300">
-                          {info.value}
-                        </p>
-                      </div>
-                    </motion.a>
-                  );
-                })}
-              </div>
+              {!loading && (
+                <div className="space-y-6">
+                  {contactDetailsItems.map((info, index) => {
+                    const IconComponent = info.icon;
+                    return (
+                      <motion.a
+                        key={index}
+                        href={info.link}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6, delay: 0.1 * index }}
+                        className="flex items-start space-x-4 p-6 rounded-2xl bg-white dark:bg-gray-800 shadow-lg hover:shadow-xl transition-all hover:scale-105"
+                      >
+                        <div className="w-12 h-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-full flex items-center justify-center flex-shrink-0">
+                          <IconComponent className="w-6 h-6 text-white" />
+                        </div>
+                        <div>
+                          <h3 className="text-lg font-bold text-gray-900 dark:text-white mb-1">
+                            {info.title}
+                          </h3>
+                          <p className="text-gray-600 dark:text-gray-300">
+                            {info.value}
+                          </p>
+                        </div>
+                      </motion.a>
+                    );
+                  })}
+                </div>
+              )}
 
               {/* Map Placeholder */}
               <motion.div
