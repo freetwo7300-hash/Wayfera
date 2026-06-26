@@ -39,3 +39,8 @@ expertMode = true
 [postMerge]
 path = "scripts/post-merge.sh"
 timeoutMs = 20000
+
+[userenv]
+
+[userenv.shared]
+PRISMA_DATABASE_URL = "postgres://fc8ca5892331941f2832c6054fe9ef515b35340e367ef86a41fc156048d7b108:sk_R7aZtsR-ExdoDUFyOg3IX@db.prisma.io:5432/postgres?sslmode=require"
