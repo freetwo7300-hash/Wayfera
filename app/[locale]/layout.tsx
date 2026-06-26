@@ -25,7 +25,7 @@ const notoKufiArabic = Noto_Kufi_Arabic({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://wayfera.netlify.app'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || 'https://wayfera.com'),
   title: {
     default: 'Wayfera - Premium Travel Agency | Discover Amazing Destinations',
     template: '%s | Wayfera'
@@ -85,9 +85,9 @@ export default async function RootLayout({
   params
 }: {
   children: React.ReactNode;
-  params: { locale: string };
+  params: Promise<{ locale: string }>;
 }) {
-  const { locale } = params;
+  const { locale } = await params;
   const messages = await getMessages({ locale });
 
   return (
@@ -103,7 +103,7 @@ export default async function RootLayout({
           <ThemeProvider
             attribute="class"
             defaultTheme="light"
-            enableSystem
+            enableSystem={false}
             disableTransitionOnChange
           >
             {children}
