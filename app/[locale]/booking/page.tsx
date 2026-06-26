@@ -1,5 +1,11 @@
 import { Header, Footer } from '@/components/layout';
 import { BookingSection } from '@/components/features/booking';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Book Your Trip | Wayfera',
+  description: 'Customize your travel package and secure your booking with Wayfera.',
+};
 
 export default function BookingPage() {
   return (
