@@ -15,6 +15,21 @@ const nextConfig = {
     minimumCacheTTL: 60 * 60 * 24 * 365,
   },
 
+  // Tree-shake heavy packages — reduces JS bundle size significantly
+  experimental: {
+    optimizePackageImports: [
+      'lucide-react',
+      'framer-motion',
+      '@radix-ui/react-accordion',
+      '@radix-ui/react-dialog',
+      '@radix-ui/react-dropdown-menu',
+      '@radix-ui/react-select',
+      '@radix-ui/react-tabs',
+      '@radix-ui/react-tooltip',
+      'recharts',
+    ],
+  },
+
   compiler: {
     removeConsole: process.env.NODE_ENV === 'production',
   },

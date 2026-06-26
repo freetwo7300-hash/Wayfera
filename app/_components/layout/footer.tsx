@@ -1,13 +1,12 @@
-// Server Component — fetches footer data directly from Prisma (no client-side loading flash)
+// Server Component — fetches footer data directly from Prisma.
+// Data is cached for 1 hour so every page view doesn't hit the DB.
+import { unstable_cache } from 'next/cache';
 import { prisma } from '@/app/_lib/prisma';
 import { FooterClient } from './footer-client';
-import { ContactInfo, SocialLink } from '@/app/_types';
+import type { ContactInfo, SocialLink } from '@/app/_types';
 
-async function getFooterData(): Promise<{
-  contactInfo: ContactInfo | null;
-  socialLinks: SocialLink[];
-}> {
-  try {
+const getFooterData = unstable_cache(
+  async () => {
     const [contactInfo, socialLinks] = await Promise.all([
       prisma.contactInfo.findFirst(),
       prisma.socialLink.findMany({ orderBy: { name: 'asc' } }),
@@ -16,13 +15,25 @@ async function getFooterData(): Promise<{
       contactInfo: contactInfo as ContactInfo | null,
       socialLinks: socialLinks as SocialLink[],
     };
-  } catch {
-    // DB not connected (dev environment without DATABASE_URL) — render with no data
-    return { contactInfo: null, socialLinks: [] };
+  },
+  ['footer-data'],
+  {
+    revalidate: 3600, // re-fetch at most once per hour
+    tags: ['footer'],
   }
-}
+);
 
 export async function Footer() {
-  const { contactInfo, socialLinks } = await getFooterData();
+  let contactInfo: ContactInfo | null = null;
+  let socialLinks: SocialLink[] = [];
+
+  try {
+    const data = await getFooterData();
+    contactInfo = data.contactInfo;
+    socialLinks = data.socialLinks;
+  } catch {
+    // DB not connected (dev without DATABASE_URL) — render gracefully with no data
+  }
+
   return <FooterClient contactInfo={contactInfo} socialLinks={socialLinks} />;
 }
