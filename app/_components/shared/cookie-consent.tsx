@@ -60,7 +60,7 @@ export function CookieConsent() {
                     </h3>
                     <p className="text-sm text-gray-600 dark:text-gray-300">
                       We use cookies to enhance your browsing experience, serve personalized content, 
-                      and analyze our traffic. By clicking "Accept All", you consent to our use of cookies.
+                      and analyze our traffic. By clicking &quot;Accept All&quot;, you consent to our use of cookies.
                     </p>
                   </div>
                 </div>

@@ -208,7 +208,7 @@ export function ServicesSection() {
                   className="text-center"
                 >
                   <p className="text-xl lg:text-2xl text-gray-700 dark:text-gray-300 mb-8 leading-relaxed">
-                    "{testimonials[currentTestimonial].text}"
+                    &quot;{testimonials[currentTestimonial].text}&quot;
                   </p>
 
                   <div className="flex items-center justify-center mb-6">

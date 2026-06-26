@@ -226,7 +226,7 @@ export default function DestinationDetailPage() {
                 transition={{ duration: 0.6, delay: 0.3 }}
               >
                 <h2 className="text-3xl font-bold text-gray-900 dark:text-white mb-6">
-                  What's Included
+                  What&apos;s Included
                 </h2>
                 <div className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-6">
                   <div className="space-y-3">

@@ -77,7 +77,7 @@ export function Testimonials() {
               </div>
 
               <p className="text-gray-700 dark:text-gray-300 mb-6 text-sm leading-relaxed">
-                "{testimonial.text}"
+                &quot;{testimonial.text}&quot;
               </p>
 
               <div className="flex items-center">

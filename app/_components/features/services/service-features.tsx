@@ -53,7 +53,7 @@ export function ServiceFeatures() {
           className="text-center mb-16"
         >
           <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-            What's Included
+            What&apos;s Included
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
             Every package comes with comprehensive features to ensure your comfort

@@ -4,9 +4,6 @@ const withNextIntl = createNextIntlPlugin('./app/i18n.ts');
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  eslint: {
-    ignoreDuringBuilds: true,
-  },
   images: { 
     remotePatterns: [
       {

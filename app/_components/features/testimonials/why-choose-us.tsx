@@ -53,7 +53,7 @@ export function WhyChooseUs() {
             Why Choose Wayfera?
           </h2>
           <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto">
-            We're committed to making your travel dreams come true with exceptional service
+            We&apos;re committed to making your travel dreams come true with exceptional service
           </p>
         </motion.div>
 

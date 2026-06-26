@@ -76,10 +76,10 @@ export default function AboutPage() {
                 Founded in 2010, Wayfera began with a simple mission: to make world-class travel experiences accessible to everyone. What started as a small team of passionate travelers has grown into a global network of travel experts.
               </p>
               <p className="text-lg text-gray-600 dark:text-gray-300 mb-4">
-                Over the years, we've helped thousands of travelers discover amazing destinations, create lasting memories, and experience cultures from around the world.
+                Over the years, we&apos;ve helped thousands of travelers discover amazing destinations, create lasting memories, and experience cultures from around the world.
               </p>
               <p className="text-lg text-gray-600 dark:text-gray-300">
-                Today, we continue to innovate and expand our services, always keeping our customers' dreams and satisfaction at the heart of everything we do.
+                Today, we continue to innovate and expand our services, always keeping our customers&apos; dreams and satisfaction at the heart of everything we do.
               </p>
             </motion.div>
 
