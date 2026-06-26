@@ -1,0 +1,107 @@
+{
+  "cookies": {
+    "title": "Cookie Policy",
+    "lastUpdated": "Last updated:",
+    "sections": {
+      "what": {
+        "title": "1. What Are Cookies?",
+        "content": "Cookies are small text files that are placed on your computer or mobile device when you visit a website. They are widely used to make websites work more efficiently and provide information to website owners."
+      },
+      "how": {
+        "title": "2. How We Use Cookies",
+        "intro": "Wayfera uses cookies to:",
+        "items": [
+          "Remember your preferences and settings",
+          "Keep you signed in to your account",
+          "Understand how you use our website",
+          "Improve our services and user experience",
+          "Provide personalized content and recommendations",
+          "Analyze website traffic and performance"
+        ]
+      },
+      "types": {
+        "title": "3. Types of Cookies We Use",
+        "essential": {
+          "title": "Essential Cookies",
+          "description": "These cookies are necessary for the website to function properly. They enable basic functions like page navigation, access to secure areas, and booking processes.",
+          "duration": "Session or up to 1 year"
+        },
+        "performance": {
+          "title": "Performance Cookies",
+          "description": "These cookies collect information about how visitors use our website, such as which pages are visited most often. This helps us improve our website's performance.",
+          "duration": "Up to 2 years"
+        },
+        "functionality": {
+          "title": "Functionality Cookies",
+          "description": "These cookies allow the website to remember choices you make (such as language preference, currency, or region) and provide enhanced, personalized features.",
+          "duration": "Up to 1 year"
+        },
+        "targeting": {
+          "title": "Targeting/Advertising Cookies",
+          "description": "These cookies are used to deliver advertisements more relevant to you and your interests. They also help measure the effectiveness of advertising campaigns.",
+          "duration": "Up to 2 years"
+        }
+      },
+      "third_party": {
+        "title": "4. Third-Party Cookies",
+        "intro": "We may use third-party services that also set cookies on your device. These include:",
+        "items": [
+          "Google Analytics: To analyze website traffic and user behavior",
+          "Social Media Platforms: To enable social sharing features",
+          "Payment Processors: To facilitate secure transactions",
+          "Advertising Networks: To display relevant advertisements"
+        ]
+      },
+      "managing": {
+        "title": "5. Managing Cookies",
+        "intro": "You have the right to decide whether to accept or reject cookies. You can exercise your cookie preferences by:",
+        "items": [
+          "Using our cookie consent banner when you first visit our website",
+          "Adjusting your browser settings to refuse cookies",
+          "Deleting cookies that have already been set"
+        ],
+        "note": "Please note that if you choose to block or delete cookies, some features of our website may not function properly."
+      },
+      "browser": {
+        "title": "6. Browser-Specific Instructions",
+        "intro": "To manage cookies in your browser:",
+        "items": [
+          "Chrome: Settings → Privacy and security → Cookies and other site data",
+          "Firefox: Options → Privacy & Security → Cookies and Site Data",
+          "Safari: Preferences → Privacy → Manage Website Data",
+          "Edge: Settings → Cookies and site permissions → Cookies and site data"
+        ]
+      },
+      "storage": {
+        "title": "7. Local Storage and Session Storage",
+        "intro": "In addition to cookies, we use browser storage technologies (localStorage and sessionStorage) to:",
+        "items": [
+          "Store user preferences and settings",
+          "Cache data for improved performance",
+          "Maintain session information",
+          "Remember your favorite destinations"
+        ]
+      },
+      "dnt": {
+        "title": "8. Do Not Track Signals",
+        "content": "Some browsers include a \"Do Not Track\" (DNT) feature that signals to websites that you do not want to have your online activity tracked. We currently do not respond to DNT signals, but we respect your privacy choices and provide cookie management options."
+      },
+      "updates": {
+        "title": "9. Updates to This Policy",
+        "content": "We may update this Cookie Policy from time to time to reflect changes in technology, legislation, or our business practices. We will notify you of any significant changes by posting the updated policy on our website."
+      },
+      "contact": {
+        "title": "10. Contact Us",
+        "intro": "If you have questions about our use of cookies, please contact us:"
+      }
+    }
+  },
+  "privacy": {
+    "title": "Privacy Policy",
+    "lastUpdated": "Last updated:"
+  },
+  "terms": {
+    "title": "Terms of Service",
+    "lastUpdated": "Last updated:"
+  }
+}

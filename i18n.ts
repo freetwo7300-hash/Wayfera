@@ -10,7 +10,7 @@ export default getRequestConfig(async ({ locale }) => {
   // Import all JSON files from the language-specific folder
   const messageFiles = [
     'nav', 'hero', 'destinations', 'services', 'booking', 
-    'footer', 'about', 'contact'
+    'footer', 'about', 'contact', 'legal'
   ];
   
   for (const file of messageFiles) {
