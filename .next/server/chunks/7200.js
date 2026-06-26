@@ -1,0 +1,1 @@
+"use strict";exports.id=7200,exports.ids=[7200],exports.modules={77200:a=>{a.exports=JSON.parse('{"title":"احجز رحلة أحلامك","steps":{"destination":"الوجهة","details":"التفاصيل","payment":"الدفع"},"form":{"destination":"أين تريد أن تذهب؟","checkin":"تاريخ الوصول","checkout":"تاريخ المغادرة","guests":"الضيوف","adults":"البالغون","children":"الأطفال","submit":"احجز الآن"}}')}};

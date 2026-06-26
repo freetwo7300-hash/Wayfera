@@ -1,0 +1,1 @@
+"use strict";exports.id=505,exports.ids=[505],exports.modules={30505:a=>{a.exports=JSON.parse('{"title":"Destinations Populaires","subtitle":"Explorez les plus beaux endroits du monde","filters":{"all":"Tout","beach":"Plage","mountain":"Montagne","city":"Ville","adventure":"Aventure"}}')}};

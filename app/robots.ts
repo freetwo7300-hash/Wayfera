@@ -1,8 +1,8 @@
 import { MetadataRoute } from 'next';
 
-export default function robots(): MetadataRoute.Robots {
-  const baseUrl = 'https://wayfera.netlify.app';
+const BASE_URL = process.env.NEXT_PUBLIC_BASE_URL || 'https://wayfera.com';
 
+export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
       {
@@ -16,6 +16,7 @@ export default function robots(): MetadataRoute.Robots {
         disallow: ['/api/', '/admin/'],
       },
     ],
-    sitemap: `${baseUrl}/sitemap.xml`,
+    sitemap: `${BASE_URL}/sitemap.xml`,
+    host: BASE_URL,
   };
 }

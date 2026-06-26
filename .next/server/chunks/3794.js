@@ -1,0 +1,1 @@
+"use strict";exports.id=3794,exports.ids=[3794],exports.modules={63794:a=>{a.exports=JSON.parse('{"home":"الرئيسية","destinations":"الوجهات","services":"الخدمات","about":"عنا","contact":"اتصل بنا"}')}};

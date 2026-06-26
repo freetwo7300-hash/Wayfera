@@ -1,0 +1,1 @@
+"use strict";exports.id=8914,exports.ids=[8914],exports.modules={68914:a=>{a.exports=JSON.parse('{"description":"شريكك الموثوق لتجارب سفر لا تُنسى حول العالم.","quickLinks":"روابط سريعة","contact":"معلومات الاتصال","rights":"جميع الحقوق محفوظة."}')}};

@@ -1,0 +1,1 @@
+"use strict";exports.id=8644,exports.ids=[8644],exports.modules={28644:a=>{a.exports=JSON.parse('{"title":"الوجهات الشائعة","subtitle":"استكشف أروع الأماكن في العالم","filters":{"all":"الكل","beach":"شاطئ","mountain":"جبل","city":"مدينة","adventure":"مغامرة"}}')}};
