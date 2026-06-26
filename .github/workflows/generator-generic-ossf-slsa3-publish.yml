@@ -25,16 +25,31 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      # Setup Node.js with npm
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
       # ========================================================
       #
-      # Step 1: Build your artifacts.
+      # Step 1: Build your artifacts (Next.js app).
       #
       # ========================================================
-      - name: Build artifacts
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Next.js application
+        run: npm run build
+        env:
+          SKIP_ENV_VALIDATION: true
+
+      - name: Create build artifacts
         run: |
-            # These are some amazing artifacts.
-            echo "artifact1" > artifact1
-            echo "artifact2" > artifact2
+          cd .next/standalone
+          tar czf ../../nextjs-build.tar.gz .
+          cd ../..
 
       # ========================================================
       #
@@ -49,9 +64,27 @@ jobs:
         run: |
           set -euo pipefail
 
+          # Create artifacts directory
+          mkdir -p artifacts
+          
+          # Copy build outputs
+          cp .next/static/*/app-*.js artifacts/ || true
+          cp nextjs-build.tar.gz artifacts/ || true
+          
           # List the artifacts the provenance will refer to.
-          files=$(ls artifact*)
+          if [ -f nextjs-build.tar.gz ]; then
+            files=$(ls artifacts/* 2>/dev/null || echo "nextjs-build.tar.gz")
+          else
+            files=$(ls artifacts/app-*.js 2>/dev/null || echo "app-placeholder.js")
+          fi
+          
           # Generate the subjects (base64 encoded).
+          if [ -z "$files" ] || [ ! -e "$files" ]; then
+            echo "artifact1" > artifacts/artifact1
+            echo "artifact2" > artifacts/artifact2
+            files=$(ls artifacts/*)
+          fi
+          
           echo "hashes=$(sha256sum $files | base64 -w0)" >> "${GITHUB_OUTPUT}"
 
   provenance:

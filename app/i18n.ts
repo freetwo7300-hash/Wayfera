@@ -15,7 +15,7 @@ export default getRequestConfig(async ({ locale }) => {
   
   for (const file of messageFiles) {
     try {
-      const imported = await import(`./messages/${validLocale}/${file}.json`);
+      const imported = await import(`../messages/${validLocale}/${file}.json`);
       messages[file] = imported.default;
     } catch (error) {
       console.warn(`Failed to load message file: ${file}.json for locale: ${validLocale}`);
